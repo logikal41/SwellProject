@@ -1,10 +1,10 @@
 # Areas in the North Swell
-Area.create(name: 'Buckhorn Wash');
-Area.create(name: 'Mexican Mountain Road');
-Area.create(name: 'Mexican Mountain Area');
-Area.create(name: 'River Bridge West');
-Area.create(name: 'Road Draw, Oil Well Flat Road');
-Area.create(name: 'Head of Sinbad North, Eagle Canyon Area');
+Area.create(name: 'Buckhorn Wash', description: 'Buckhorn Wash descends north to south from younger to older strata of sedimentary rock. It begins with Carmel Sandstone (the equivalent of the Dewey Bridge...');
+Area.create(name: 'Mexican Mountain Road', description: 'Mexican Mountain Road begins just north of the bridge over the San Rafael River and runs east for approximately 14 miles (23km).');
+Area.create(name: 'Mexican Mountain Area', description: 'Mexican Mountain Area is at the eastern end of Mexican Mountain Road. From Mile Post 137 on I-70 (left to right), Triple Towers...');
+Area.create(name: 'River Bridge West', description: 'River Bridge West is west of the campground and the bridge over the San Rafael River.');
+Area.create(name: 'Road Draw, Oil Well Flat Road', description: 'Road Draw and Oil Well Flat Road is the region east and west of Cottonwood Wash Road, from Bottleneck Peak to Pinnacle.');
+Area.create(name: 'Head of Sinbad North, Eagle Canyon Area', description: 'Climbs at Head of Sinbad North are in the central San Rafael Swell and are reached from I-70 between Mile Post 122-123.');
 
 # Walls in each area
 Wall.create(area_id: 1, name: 'Scenic Byway Wall', description: 'Routes on Scenic Byway Wall climb Navajo Sandstone facing northeast and are shaded during hot summer afternoons.');
