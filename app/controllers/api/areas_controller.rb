@@ -1,16 +1,16 @@
 class Api::AreasController < ApplicationController
 
-    def index 
+    def index
         areas = Area.all
         render json: areas
-    end 
+    end
 
     def show
     end
 
     def update
     end
-
+# Hello
     def destroy
     end
 
