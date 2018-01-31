@@ -5,4 +5,13 @@ class Api::WallsController < ApplicationController
         render json: walls
     end 
 
+    def show
+    end
+
+    def update
+    end
+
+    def destroy
+    end
+
 end
