@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180130015045) do
+ActiveRecord::Schema.define(version: 20180131055200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,22 @@ ActiveRecord::Schema.define(version: 20180130015045) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "routes", force: :cascade do |t|
+    t.string "name"
+    t.string "difficulty"
+    t.integer "pitch"
+    t.string "length"
+    t.float "rating"
+    t.string "first_ascent"
+    t.text "description"
+    t.string "gear"
+    t.string "descent"
+    t.bigint "wall_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["wall_id"], name: "index_routes_on_wall_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,5 +76,6 @@ ActiveRecord::Schema.define(version: 20180130015045) do
     t.index ["area_id"], name: "index_walls_on_area_id"
   end
 
+  add_foreign_key "routes", "walls"
   add_foreign_key "walls", "areas"
 end
