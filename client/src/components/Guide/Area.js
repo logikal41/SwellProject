@@ -7,6 +7,7 @@ const Area = ({ name, description }) => {
             <List>
                 <List.Item>
                     <List.Header>{name}</List.Header>
+                    {description}
                 </List.Item>
             </List>
         </Container>

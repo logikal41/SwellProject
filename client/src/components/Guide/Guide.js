@@ -1,23 +1,20 @@
 import React from 'react';
 import { Header, Container } from 'semantic-ui-react';
 import AreaList from './AreaList';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { getAreas } from '../../actions/areas';
 
 class Guide extends React.Component {
-    state = { areas: [] }
 
     componentDidMount() {
-        axios.get('/api/areas')
-          .then ( res => {
-            this.setState({ areas: res.data })
-          })
+        this.props.dispatch(getAreas());
       }
 
     render() {
         return (
             <Container computer='6'>
                 <Header as='h1' textAlign='center'>This is the Guide</Header>
-                <AreaList areas={this.state.areas} />
+                <AreaList areas={this.props.areas} />
             </Container>
             // <Container computer='10'>
             //     <Header as='h1' textAlign='center'>Area information</Header>
@@ -28,4 +25,8 @@ class Guide extends React.Component {
 
 }
 
-export default Guide;
+const mapStateToProps = state => {
+    return { areas: state.areas };
+  };
+
+export default connect(mapStateToProps)(Guide);

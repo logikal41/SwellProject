@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Header, Container } from 'semantic-ui-react';
-import axios from 'axios';
+import Area from './Area';
 
 class AreaList extends Component {
 
@@ -15,7 +15,7 @@ class AreaList extends Component {
           <Header as='h1' textAlign='center'>Areas in the Northern Swell:</Header>
           <ul>
             { areas.map( area => {
-              return <li key={area.id}>{area.name}</li>
+              return <Area name={area.name} description={area.description} />
             })}
           </ul>
         </Container>
