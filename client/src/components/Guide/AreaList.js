@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Header, Container } from 'semantic-ui-react';
+import { List, Header, Container } from 'semantic-ui-react';
 import Area from './Area';
+import { connect } from 'react-redux';
 
 class AreaList extends Component {
 
@@ -13,15 +14,22 @@ class AreaList extends Component {
       return (
         <Container>
           <Header as='h1' textAlign='center'>Areas in the Northern Swell:</Header>
-          <ul>
+          <List>
             { areas.map( area => {
-              return <Area name={area.name} description={area.description} />
+              return ( 
+                <Area 
+                  id={area.id}
+                  name={area.name} 
+                  description={area.description} 
+                  dispatch={this.props.dispatch} 
+                />
+              ) 
             })}
-          </ul>
+          </List>
         </Container>
       );
     }
   }
 }
 
-export default AreaList;
+export default connect()(AreaList);

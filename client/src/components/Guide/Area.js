@@ -1,16 +1,14 @@
 import React from 'react';
 import { List, Container } from 'semantic-ui-react';
+import { deleteArea, selectArea } from '../../actions/areas';
 
-const Area = ({ name, description }) => {
+const Area = ({ id, name, description, dispatch }) => {
     return ( 
-        <Container>
-            <List>
-                <List.Item>
-                    <List.Header>{name}</List.Header>
-                    {description}
-                </List.Item>
-            </List>
-        </Container>
+        // Need to change the css so this is obviously a clickable
+        <List.Item onClick={() => dispatch(selectArea(id))} key={id}>
+            <List.Header>{name}</List.Header>
+            {description}
+        </List.Item>
     )
 }
 

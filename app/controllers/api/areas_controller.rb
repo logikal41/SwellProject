@@ -10,7 +10,7 @@ class Api::AreasController < ApplicationController
   
     def update
       area = Area.find(params[:id])
-      Area.update(area_params)
+      area.update(area_params)
       render json: area
     end
   
