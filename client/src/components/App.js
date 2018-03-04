@@ -6,6 +6,7 @@ import Register from './Register';
 import Flash from './Flash';
 import Home from './Home';
 import Guide from './Guide/Guide';
+import UserWelcome from './UserWelcome';
 import ProtectedRoute from './ProtectedRoute';
 import AuthRoute from './AuthRoute';
 import FetchUser from './FetchUser';
@@ -20,6 +21,7 @@ class App extends Component {
         <FetchUser>
           <Switch>
             <Route exact path='/' component={Home} />
+            <Route exact path='/userwelcome' component={UserWelcome} />
             <ProtectedRoute exact path='/guide' component={Guide} authLevel={["admin"]} />
             <AuthRoute exact path='/login' component={Login} />
             <AuthRoute exact path='/register' component={Register} />
