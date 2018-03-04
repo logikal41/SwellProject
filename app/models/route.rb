@@ -1,3 +1,3 @@
 class Route < ApplicationRecord
-  belongs_to :wall,  dependent: :delete_all
+  belongs_to :wall,  dependent: :destroy
 end
