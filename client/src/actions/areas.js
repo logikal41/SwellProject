@@ -19,11 +19,37 @@ export const getAreas = () => {
     return dispatch => {
     axios.delete(`api/areas/${id}`)
       .then( res => {
-        dispatch({ type: 'DELETE_AREA', area: id });
+        dispatch({ type: 'DELETE_AREA', id });
         dispatch(setHeaders(res.headers));
       })
       .catch( err => {
         dispatch(setFlash('Failed to delete Area', 'red'));
+      })  
+    } 
+  }
+
+  export const updateArea = ({id, name, description}) => {
+    return dispatch => {
+    axios.put(`api/areas/${id}`, { name, description })
+      .then( res => {
+        dispatch({ type: 'UPDATE_AREA', area: res.data });
+        dispatch(setHeaders(res.headers));
+      })
+      .catch( err => {
+        dispatch(setFlash('Failed to update area', 'red'));
+      })  
+    } 
+  }
+
+  export const createArea = ({name, description}) => {
+    return dispatch => {
+    axios.post('api/areas', { name, description })
+      .then( res => {
+        dispatch({ type: 'CREATE_AREA', area: res.data });
+        dispatch(setHeaders(res.headers));
+      })
+      .catch( err => {
+        dispatch(setFlash('Failed to create area', 'red'));
       })  
     } 
   }

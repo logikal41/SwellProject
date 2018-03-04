@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   # this nested route is only a band aid... there will be 4 to 5 tables ... cant nest that deep
   namespace :api do
-    resources :areas, only: [ :index, :destroy, :update ] do
+    resources :areas do
       resources :walls, only: [ :index, :destroy, :update ]
     end
   end

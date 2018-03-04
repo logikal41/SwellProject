@@ -1,20 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { List, Header, Container } from 'semantic-ui-react';
-import { getWalls } from '../../actions/walls';
+import { List, Header, Container, Button } from 'semantic-ui-react';
 
 class Details extends React.Component {
 
-    // i need this to update everytime the selecedArea prop changes
-
-    // this causes an infinite loop... why??
-
-    // componentDidUpdate() {
-    //     this.props.dispatch(getWalls(this.props.selectedArea));
-    // };
-
     render() {
-        const { selectedArea } = this.props;
+        const { selectedArea, walls, toggleUpdate } = this.props;
     
         if(selectedArea == null) {
             return <Header as='h1' textAlign='center'>Welcome to the San Rafael Swell Guide</Header>
@@ -27,6 +18,17 @@ class Details extends React.Component {
                         </List.Item>
                         <List.Item>
                             {selectedArea.description}
+                        </List.Item>
+                        <List.Item>
+                            <Button secondary onClick={() => toggleUpdate()}>Update</Button>
+                        </List.Item>
+                        <List.Item>
+                            <Header as='h3' textAlign='center'>Walls in {selectedArea.name}:</Header>
+                            {walls.map( wall => 
+                                 <List.Item key={wall.id}>
+                                     {wall.name}
+                                </List.Item>
+                            )}
                         </List.Item>
                     </List>
                 </Container>

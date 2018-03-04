@@ -1,25 +1,24 @@
 import React from 'react';
-import { List, Container } from 'semantic-ui-react';
-import { deleteArea, selectArea } from '../../actions/areas';
+import { List } from 'semantic-ui-react';
+import { selectArea } from '../../actions/areas';
 import { getWalls } from '../../actions/walls';
 import { connect } from 'react-redux';
 
 class Area extends React.Component { 
 
-    // this causes an infinite loop... why??
-
-    // onSelect = (id) => {
-    //     this.props.dispatch(selectArea(id));
-    //     this.props.dispatch(getWalls(this.props.selectedArea));
-    // }
+    onSelect = (area) => {
+        const { dispatch } = this.props;
+        dispatch(selectArea(area));
+        dispatch(getWalls(area.id));
+    }
 
     render() {
 
-    const { area, dispatch } = this.props;
+    const { area } = this.props;
 
     return ( 
         // Need to change the css so this is obviously a clickable
-        <List.Item onClick={() => dispatch(selectArea(area))} key={area.id}>
+        <List.Item onClick={() => this.onSelect(area)}>
             {area.name}
         </List.Item>
     )

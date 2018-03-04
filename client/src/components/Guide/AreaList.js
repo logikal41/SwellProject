@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import { List, Header, Container } from 'semantic-ui-react';
+import { List, Header, Container, Button } from 'semantic-ui-react';
 import Area from './Area';
 import { connect } from 'react-redux';
-import { getAreas } from '../../actions/areas';
+import { getAreas, selectArea } from '../../actions/areas';
 
 class AreaList extends Component {
 
   componentDidMount() {
     this.props.dispatch(getAreas());
+   }
+
+   toggleCreate = () => {
+     this.props.dispatch(selectArea(null));
+     this.props.toggleUpdate();
    }
 
   render() {
@@ -18,11 +23,13 @@ class AreaList extends Component {
     } else {
       return (
         <Container>
+          <Button onClick={() => this.toggleCreate()}>Create Area</Button>
           <List>
             { areas.map( area => {
               return ( 
                 <Area
-                  area = {area} 
+                  key={area.id}
+                  area={area} 
                   dispatch={this.props.dispatch} 
                 />
               ) 
