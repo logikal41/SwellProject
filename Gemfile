@@ -28,7 +28,9 @@ gem 'puma', '~> 3.7'
 gem 'omniauth'
 gem 'devise'
 gem 'devise_token_auth'
+gem 'devise_invitable', '~> 1.7.0'
 group :development, :test do
+  gem "letter_opener"
   gem 'pry'
 end
 

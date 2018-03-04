@@ -6,6 +6,8 @@ import Register from './Register';
 import Flash from './Flash';
 import Home from './Home';
 import Guide from './Guide/Guide';
+import MemberTab from './Members/MemberTab';
+import InviteConfirmation from './InviteConfirmation';
 import UserWelcome from './UserWelcome';
 import ProtectedRoute from './ProtectedRoute';
 import AuthRoute from './AuthRoute';
@@ -22,7 +24,9 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/userwelcome' component={UserWelcome} />
+            <Route exact path='/invitation/accept' component={InviteConfirmation} />
             <ProtectedRoute exact path='/guide' component={Guide} authLevel={["admin"]} />
+            <ProtectedRoute exact path='/members' component={MemberTab} authLevel={["admin"]} />
             <AuthRoute exact path='/login' component={Login} />
             <AuthRoute exact path='/register' component={Register} />
             <Route component={NoMatch} />

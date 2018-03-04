@@ -5,6 +5,7 @@ import areas from './areas';
 import selectedArea from './selectedArea';
 import walls from './walls';
 import selectedWall from './selectedWall';
+import members from './members';
 
 const rootReducer = combineReducers({
   user,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   selectedArea,
   walls,
   selectedWall,
+  members,
 });
 
 export default rootReducer;
