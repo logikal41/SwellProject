@@ -28,8 +28,8 @@ export const getAreas = () => {
     } 
   }
 
-  export const selectArea = (id) => {
+  export const selectArea = (area) => {
     return dispatch => {
-      dispatch({ type: 'SELECT_AREA', area: id });
+      dispatch({ type: 'SELECT_AREA', area: area });
     }
   }

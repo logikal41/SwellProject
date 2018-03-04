@@ -6,20 +6,32 @@ import { getWalls } from '../../actions/walls';
 class Details extends React.Component {
 
     // i need this to update everytime the selecedArea prop changes
-    componentWillMount() {
-        this.props.dispatch(getWalls(this.props.selectedArea));
-    };
+
+    // this causes an infinite loop... why??
+
+    // componentDidUpdate() {
+    //     this.props.dispatch(getWalls(this.props.selectedArea));
+    // };
 
     render() {
         const { selectedArea } = this.props;
     
-        return (
-            <Container>
-                 <Header as='h1' textAlign='center'>Area Name: {selectedArea}</Header>
-                <List>
-                </List>
-            </Container>
-        )
+        if(selectedArea == null) {
+            return <Header as='h1' textAlign='center'>Welcome to the San Rafael Swell Guide</Header>
+        } else {
+            return (
+                <Container>
+                    <List>
+                        <List.Item>
+                            <Header as='h1' textAlign='center'>Area Name: {selectedArea.name}</Header>
+                        </List.Item>
+                        <List.Item>
+                            {selectedArea.description}
+                        </List.Item>
+                    </List>
+                </Container>
+            )
+        }
     }
 }
 

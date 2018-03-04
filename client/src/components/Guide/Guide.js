@@ -1,34 +1,25 @@
 import React from 'react';
-import { Header, Container } from 'semantic-ui-react';
+import { Header, Container, Grid } from 'semantic-ui-react';
 import AreaList from './AreaList';
 import Details from './Details';
-import { connect } from 'react-redux';
-import { getAreas } from '../../actions/areas';
 
 class Guide extends React.Component {
 
-    componentDidMount() {
-        this.props.dispatch(getAreas());
-      }
-
     render() {
         return (
-            <div>
-                <Container computer='6'>
-                    <Header as='h1' textAlign='center'>This is the Guide</Header>
-                    <AreaList areas={this.props.areas} />
-                </Container>
-                <Container computer='10'>
-                    <Details />
-                </Container>
-            </div>
+            <Container>
+                <Grid>
+                    <Grid.Column width={4}>
+                        <Header as='h1' textAlign='center'>Area List</Header>
+                        <AreaList />
+                    </Grid.Column>
+                    <Grid.Column width={12}>
+                        <Details />
+                    </Grid.Column>
+                </Grid>
+            </Container>
         )
     }
-
 }
 
-const mapStateToProps = state => {
-    return { areas: state.areas };
-  };
-
-export default connect(mapStateToProps)(Guide);
+export default Guide;

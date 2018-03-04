@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import { List, Header, Container } from 'semantic-ui-react';
 import Area from './Area';
 import { connect } from 'react-redux';
+import { getAreas } from '../../actions/areas';
 
 class AreaList extends Component {
+
+  componentDidMount() {
+    this.props.dispatch(getAreas());
+   }
 
   render() {
     const { areas } = this.props;
@@ -13,14 +18,11 @@ class AreaList extends Component {
     } else {
       return (
         <Container>
-          <Header as='h1' textAlign='center'>Areas in the Northern Swell:</Header>
           <List>
             { areas.map( area => {
               return ( 
-                <Area 
-                  id={area.id}
-                  name={area.name} 
-                  description={area.description} 
+                <Area
+                  area = {area} 
                   dispatch={this.props.dispatch} 
                 />
               ) 
@@ -32,4 +34,8 @@ class AreaList extends Component {
   }
 }
 
-export default connect()(AreaList);
+const mapStateToProps = state => {
+    return { areas: state.areas };
+};
+
+export default connect(mapStateToProps)(AreaList);
