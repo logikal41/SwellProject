@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { List, Header, Container, Button } from 'semantic-ui-react';
+import { selectWall } from '../../actions/walls';
 
 class Details extends React.Component {
 
     render() {
-        const { selectedArea, walls, toggleUpdate } = this.props;
+        const { selectedArea, walls, toggleUpdate, dispatch } = this.props;
     
         if(selectedArea == null) {
             return <Header as='h1' textAlign='center'>Welcome to the San Rafael Swell Guide</Header>
@@ -25,7 +26,7 @@ class Details extends React.Component {
                         <List.Item>
                             <Header as='h3' textAlign='center'>Walls in {selectedArea.name}:</Header>
                             {walls.map( wall => 
-                                 <List.Item key={wall.id}>
+                                 <List.Item key={wall.id} onClick={() => dispatch(selectWall(wall))}>
                                      {wall.name}
                                 </List.Item>
                             )}
