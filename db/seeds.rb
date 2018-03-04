@@ -1,3 +1,9 @@
+# Users
+# admin 
+User.create(confirmed_at: Time.now, name: "Admin", email: "admin@test.com", password: "password", role: "admin")
+# user
+User.create(confirmed_at: Time.now, name: "User", email: "user@test.com", password: "password", role: "user")
+
 # Areas in the North Swell
 Area.create(name: 'Buckhorn Wash', description: 'Buckhorn Wash descends north to south from younger to older strata of sedimentary rock. It begins with Carmel Sandstone (the equivalent of the Dewey Bridge...');
 Area.create(name: 'Mexican Mountain Road', description: 'Mexican Mountain Road begins just north of the bridge over the San Rafael River and runs east for approximately 14 miles (23km).');
