@@ -6,6 +6,7 @@ import Register from './Register';
 import Flash from './Flash';
 import Home from './Home';
 import Guide from './Guide/Guide';
+import Bio from './Bio';
 import MemberTab from './Members/MemberTab';
 import InviteConfirmation from './InviteConfirmation';
 import UserWelcome from './UserWelcome';
@@ -25,7 +26,8 @@ class App extends Component {
             <Route exact path='/' component={Home} />
             <Route exact path='/userwelcome' component={UserWelcome} />
             <Route exact path='/invitation/accept' component={InviteConfirmation} />
-            <ProtectedRoute exact path='/guide' component={Guide} authLevel={["admin"]} />
+            <Route exact path='/bio' component={Bio} />
+            <ProtectedRoute exact path='/guide' component={Guide} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/members' component={MemberTab} authLevel={["admin"]} />
             <AuthRoute exact path='/login' component={Login} />
             <AuthRoute exact path='/register' component={Register} />

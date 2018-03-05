@@ -9,8 +9,11 @@ class Home extends Component {
       case "admin": {
         return <Redirect to={`/guide`}/>;
       }
+      case "user": {
+        return <Redirect to={`/userwelcome`}/>;
+      }
       default: {
-        return <Redirect to='/userwelcome'/>;
+        return <Redirect to={'/login'}/>;
       }
     }
   }
