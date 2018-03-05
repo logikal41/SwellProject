@@ -38,10 +38,10 @@ class Details extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ selectedArea, walls }) => {
     return { 
-        selectedArea: state.selectedArea,
-        walls: state.walls, 
+        selectedArea,
+        walls,
     };
   };
 

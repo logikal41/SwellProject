@@ -2,11 +2,17 @@ import axios from 'axios';
 import { setHeaders } from './headers';
 import { setFlash } from './flash';
 
+export const GET_AREAS = 'GET_AREAS';
+export const DELETE_AREA = 'DELETE_AREA';
+export const UPDATE_AREA = 'UPDATE_AREA';
+export const CREATE_AREA = 'CREATE_AREA';
+export const SELECT_AREA = 'SELECT_AREA';
+
 export const getAreas = () => {
   return dispatch => {
     axios.get('/api/areas')
       .then( res => {
-        dispatch({ type: 'GET_AREAS', areas: res.data });
+        dispatch({ type: GET_AREAS, areas: res.data });
         dispatch(setHeaders(res.headers));
       })
       .catch( err => {
@@ -19,7 +25,7 @@ export const getAreas = () => {
     return dispatch => {
     axios.delete(`api/areas/${id}`)
       .then( res => {
-        dispatch({ type: 'DELETE_AREA', id });
+        dispatch({ type: DELETE_AREA, id });
         dispatch(setHeaders(res.headers));
       })
       .catch( err => {
@@ -32,7 +38,7 @@ export const getAreas = () => {
     return dispatch => {
     axios.put(`api/areas/${id}`, { name, description })
       .then( res => {
-        dispatch({ type: 'UPDATE_AREA', area: res.data });
+        dispatch({ type: UPDATE_AREA, area: res.data });
         dispatch(setHeaders(res.headers));
       })
       .catch( err => {
@@ -45,7 +51,7 @@ export const getAreas = () => {
     return dispatch => {
     axios.post('api/areas', { name, description })
       .then( res => {
-        dispatch({ type: 'CREATE_AREA', area: res.data });
+        dispatch({ type: CREATE_AREA, area: res.data });
         dispatch(setHeaders(res.headers));
       })
       .catch( err => {
@@ -56,6 +62,6 @@ export const getAreas = () => {
 
   export const selectArea = (area) => {
     return dispatch => {
-      dispatch({ type: 'SELECT_AREA', area: area });
+      dispatch({ type: SELECT_AREA, area: area });
     }
   }

@@ -32,9 +32,15 @@ class UpdateForm extends React.Component {
     this.props.toggleUpdate();
     }
 
+    handleDelete = (id) => {
+        this.props.dispatch(selectArea(null));
+        this.props.dispatch(deleteArea(id));
+        this.props.toggleUpdate();
+    }
+
 
     render() {
-        const{ selectedArea, dispatch } = this.props;
+        const{ selectedArea } = this.props;
 
         if( selectedArea === null ) {
             return (
@@ -81,7 +87,7 @@ class UpdateForm extends React.Component {
                         />
                         <Form.Button positive>Submit</Form.Button>
                         <Button onClick={() => this.props.toggleUpdate()}>Cancel</Button>
-                        <Button onClick={() => dispatch(deleteArea(selectedArea.id))}>Delete</Button>
+                        <Button onClick={() => this.handleDelete(selectedArea.id)}>Delete</Button>
                     </Form>
                 </Container>
             )
@@ -89,10 +95,10 @@ class UpdateForm extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ selectedArea, areas }) => {
     return {
-        selectedArea: state.selectedArea,
-        areas: state.areas,
+        selectedArea,
+        areas,
     }
 }
 

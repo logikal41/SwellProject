@@ -41,8 +41,8 @@ class AreaList extends Component {
   }
 }
 
-const mapStateToProps = state => {
-    return { areas: state.areas };
+const mapStateToProps = ({ areas }) => {
+    return { areas };
 };
 
 export default connect(mapStateToProps)(AreaList);

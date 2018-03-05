@@ -1,6 +1,8 @@
+import { SELECT_WALL } from '../actions/walls';
+
 const selectedWall = (state = null, action) => {
     switch (action.type) {
-      case 'SELECT_WALL':
+      case SELECT_WALL:
         return action.wall;
       default:
         return state;

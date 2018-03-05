@@ -1,7 +1,8 @@
+import { GET_WALLS } from '../actions/walls';
 
 const walls = (state = [], action) => {
     switch (action.type) {
-      case 'GET_WALLS':
+      case GET_WALLS:
         return action.walls;
       default:
         return state;

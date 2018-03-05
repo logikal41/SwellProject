@@ -3,12 +3,16 @@ import axios from 'axios';
 import { setFlash } from '../actions/flash';
 import { setHeaders } from '../actions/headers';
 
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
+export const VALIDATE_TOKEN = 'VALIDATE_TOKEN';
+
 const login = user => {
-  return { type: 'LOGIN', user };
+  return { type: LOGIN, user };
 };
 
 const logout = () => {
-  return { type: 'LOGOUT' };
+  return { type: LOGOUT };
 };
 
 export const registerUser = (email, password, passwordConfirmation, history) => {
@@ -74,7 +78,7 @@ export const handleLogin = (email, password, history) => {
 
 export const validateToken = (callBack = () => {}) => {
   return dispatch => {
-    dispatch({ type: 'VALIDATE_TOKEN' });
+    dispatch({ type: VALIDATE_TOKEN });
     const headers = axios.defaults.headers.common;
     axios.get('/api/auth/validate_token', headers)
       .then(res => {
