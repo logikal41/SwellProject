@@ -1,4 +1,4 @@
 class Wall < ApplicationRecord
-  belongs_to :area, dependent: :destroy
-  has_many :routes
+  belongs_to :area 
+  has_many :routes, dependent: :destroy
 end

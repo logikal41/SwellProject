@@ -1,7 +1,7 @@
 class Api::AreasController < ApplicationController
 
     def index
-      render json: Area.all
+      render json: Area.all.order(id: :asc)
     end
   
     def show

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   namespace :api do
     get 'invitations/accept'
   end
@@ -13,10 +14,13 @@ Rails.application.routes.draw do
 
   mount_devise_token_auth_for 'User', at: 'api/auth'
   
-  # this nested route is only a band aid... there will be 4 to 5 tables ... cant nest that deep
+  # This nested route is only a band aid... there will be 4 to 5 tables ... cant nest that deep
+
   namespace :api do
     resources :areas do
-      resources :walls, only: [ :index, :destroy, :update ]
+      resources :walls, only: [ :index, :destroy, :update ] do
+        resources :routes, only: [ :index, :destroy, :update ]
+      end
     end
     resources :users, only: [:index]
     post '/invitation/send', to: 'invitations#invite'
