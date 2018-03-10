@@ -17,14 +17,12 @@ Rails.application.routes.draw do
   # This nested route is only a band aid... there will be 4 to 5 tables ... cant nest that deep
 
   namespace :api do
-    resources :areas do
-      resources :walls, only: [ :index, :destroy, :update ] do
-        resources :routes, only: [ :index, :destroy, :update ]
-      end
-    end
-    resources :walls, only: :show
-    resources :users, only: [:index]
     resources :groups, only: :show
+    resources :areas, only: :show
+    resources :walls, only: :show
+    resources :routes, only: :show
+    resources :users, only: [:index]
+    
     post '/invitation/send', to: 'invitations#invite'
     post '/invitation/accept', to: 'invitations#accept'
   end

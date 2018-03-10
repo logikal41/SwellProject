@@ -1,7 +1,7 @@
 class Api::AreasController < ApplicationController
 
     def index
-      render json: Area.all.order(id: :asc)
+      render json: Area.where(group_id: params[:group_id])
     end
   
     def show
@@ -31,7 +31,7 @@ class Api::AreasController < ApplicationController
   
     private
       def area_params
-        params.require(:area).permit(:name, :description)
+        params.require(:area).permit(:group_id, :name, :description)
       end
 
 end
