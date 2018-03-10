@@ -24,7 +24,6 @@ class RouteList extends Component {
     })
   }
 
-
   render() {
     const { routes } = this.state;
 
