@@ -6,11 +6,8 @@ class Home extends Component {
 
   render() {
     switch(this.props.user.role){
-      case "admin": {
+      case "admin" || "user": {
         return <Redirect to={`/guide`}/>;
-      }
-      case "user": {
-        return <Redirect to={`/userwelcome`}/>;
       }
       default: {
         return <Redirect to={'/login'}/>;

@@ -1,46 +1,45 @@
 import React from 'react';
-import { Header, Container, Grid } from 'semantic-ui-react';
+import { Container, Grid } from 'semantic-ui-react';
 import AreaList from './AreaList';
-import Details from './Details';
-import UpdateForm from './UpdateForm';
+import WallList from './WallList';
+import RouteList from './RouteList';
+import DetailWindow from './DetailWindow';
 
 class Guide extends React.Component {
-    state = { updateForm: false };
 
-    toggleUpdate = () => {
-        this.setState({updateForm: !this.state.updateForm})
+    renderList = () => {
+        const { path, params } = this.props.match;
+        switch(path){
+            case '/guide': {
+                return <AreaList />
+            }
+            case '/area/:id': {
+                return <WallList area_id={params.id} />
+            }
+            case '/wall/:id': {
+                return <RouteList wall_id={params.id} />
+            }
+            default: {
+                return <div>Select a group!!!</div>
+            }
+        }
     }
 
     render() {
-        if(this.state.updateForm === false ) {
-            return (
-                <Container>
-                    <Grid>
-                        <Grid.Column width={4}>
-                            <Header as='h1' textAlign='center'>Area List</Header>
-                            <AreaList toggleUpdate={this.toggleUpdate} />
-                        </Grid.Column>
-                        <Grid.Column width={12}>
-                            <Details toggleUpdate={this.toggleUpdate} />
-                        </Grid.Column>
-                    </Grid>
-                </Container>
-            )
-        } else {
-            return (
-                <Container>
-                    <Grid>
-                        <Grid.Column width={4}>
-                            <Header as='h1' textAlign='center'>Area List</Header>
-                            <AreaList toggleUpdate={this.toggleUpdate} />
-                        </Grid.Column>
-                        <Grid.Column width={12}>
-                            <UpdateForm toggleUpdate={this.toggleUpdate} />
-                        </Grid.Column>
-                    </Grid>
-                </Container>
-            )
-        }
+      
+        return (
+            <Container>
+                <Grid>
+                    <Grid.Column width={4}>
+                        {this.renderList()}
+                    </Grid.Column>
+                    <Grid.Column width={12}>
+                        <DetailWindow infoType={this.props.match.path}/>
+                    </Grid.Column>
+                </Grid>
+            </Container>
+        )
+        
     }
 }
 

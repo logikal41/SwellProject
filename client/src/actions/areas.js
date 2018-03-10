@@ -62,6 +62,6 @@ export const getAreas = () => {
 
   export const selectArea = (area) => {
     return dispatch => {
-      dispatch({ type: SELECT_AREA, area: area });
+      dispatch({ type: SELECT_AREA, payload: area });
     }
   }

@@ -5,40 +5,40 @@ import { Link } from 'react-router-dom'; // desconstruct withRouter here when do
 import axios from 'axios';
 import { setHeaders } from '../../actions/headers';
 import { setFlash } from '../../actions/flash';
-import { selectGroup } from '../../actions/groups';
+import { selectArea } from '../../actions/areas';
 
-class AreaList extends Component {
-  state={ areas: [] };
+class WallList extends Component {
+  state={ walls: [] };
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    axios.get('/api/groups/1') // group 1 is hardcoded since we are only doing this for the san rafael swell at this time
+    const { dispatch, area_id } = this.props;
+    axios.get(`/api/areas/${area_id}`)
     .then( res => {
-      this.setState({ areas: res.data.areas});
-      dispatch(selectGroup(res.data.group));
+      this.setState({ walls: res.data.walls});
+      dispatch(selectArea(res.data.area));
       dispatch(setHeaders(res.headers));
     })
     .catch( err => {
-      dispatch(setFlash('Failed to get areas', 'red'));
+      dispatch(setFlash('Failed to get walls', 'red'));
     })
   }
 
 
   render() {
-    const { areas } = this.state;
+    const { walls } = this.state;
 
-    if ( areas.length === 0) {
+    if ( walls.length === 0) {
       return <Header as='h1' textAlign='center'>Loading...</Header>
     } else {
       return (
         <Container>
           {/* <Button onClick={() => this.toggleCreate()}>Create Area</Button> */}
-          <Header as='h1' textAlign='center'>Area List</Header>
+          <Header as='h1' textAlign='center'>Wall List</Header>
           <List>
-            { areas.map( area => {
+            { walls.map( wall => {
               return (
-                <List.Item key={area.id}>
-                  <Link to={`/area/${area.id}`}> {area.name} </Link>
+                <List.Item key={wall.id}>
+                  <Link to={`/wall/${wall.id}`}> {wall.name} </Link>
                 </List.Item>
               )
             })}
@@ -49,4 +49,4 @@ class AreaList extends Component {
   }
 }
 
-export default connect()(AreaList);
+export default connect()(WallList);

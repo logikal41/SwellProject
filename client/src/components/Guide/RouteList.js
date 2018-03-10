@@ -5,40 +5,41 @@ import { Link } from 'react-router-dom'; // desconstruct withRouter here when do
 import axios from 'axios';
 import { setHeaders } from '../../actions/headers';
 import { setFlash } from '../../actions/flash';
-import { selectGroup } from '../../actions/groups';
+import { selectWall } from '../../actions/walls';
+import { selectRoute } from '../../actions/routes';
 
-class AreaList extends Component {
-  state={ areas: [] };
+class RouteList extends Component {
+  state={ routes: [] };
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    axios.get('/api/groups/1') // group 1 is hardcoded since we are only doing this for the san rafael swell at this time
+    const { dispatch, wall_id } = this.props;
+    axios.get(`/api/walls/${wall_id}`)
     .then( res => {
-      this.setState({ areas: res.data.areas});
-      dispatch(selectGroup(res.data.group));
+      this.setState({ routes: res.data.routes});
+      dispatch(selectWall(res.data.wall));
       dispatch(setHeaders(res.headers));
     })
     .catch( err => {
-      dispatch(setFlash('Failed to get areas', 'red'));
+      dispatch(setFlash('Failed to get routes', 'red'));
     })
   }
 
 
   render() {
-    const { areas } = this.state;
+    const { routes } = this.state;
 
-    if ( areas.length === 0) {
+    if ( routes.length === 0) {
       return <Header as='h1' textAlign='center'>Loading...</Header>
     } else {
       return (
         <Container>
           {/* <Button onClick={() => this.toggleCreate()}>Create Area</Button> */}
-          <Header as='h1' textAlign='center'>Area List</Header>
+          <Header as='h1' textAlign='center'>Route List</Header>
           <List>
-            { areas.map( area => {
+            { routes.map( route => {
               return (
-                <List.Item key={area.id}>
-                  <Link to={`/area/${area.id}`}> {area.name} </Link>
+                <List.Item key={route.id} onClick={() => this.props.dispatch(selectRoute(route))}>
+                  {route.name}
                 </List.Item>
               )
             })}
@@ -49,4 +50,4 @@ class AreaList extends Component {
   }
 }
 
-export default connect()(AreaList);
+export default connect()(RouteList);

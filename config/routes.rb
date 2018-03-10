@@ -22,7 +22,9 @@ Rails.application.routes.draw do
         resources :routes, only: [ :index, :destroy, :update ]
       end
     end
+    resources :walls, only: :show
     resources :users, only: [:index]
+    resources :groups, only: :show
     post '/invitation/send', to: 'invitations#invite'
     post '/invitation/accept', to: 'invitations#accept'
   end

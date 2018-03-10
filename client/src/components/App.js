@@ -9,7 +9,6 @@ import Guide from './Guide/Guide';
 import Bio from './Bio';
 import MemberTab from './Members/MemberTab';
 import InviteConfirmation from './InviteConfirmation';
-import UserWelcome from './UserWelcome';
 import ProtectedRoute from './ProtectedRoute';
 import AuthRoute from './AuthRoute';
 import FetchUser from './FetchUser';
@@ -24,10 +23,11 @@ class App extends Component {
         <FetchUser>
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route exact path='/userwelcome' component={UserWelcome} />
             <Route exact path='/invitation/accept' component={InviteConfirmation} />
-            <Route exact path='/bio' component={Bio} />
+            <ProtectedRoute exact path='/bio' component={Bio} />
             <ProtectedRoute exact path='/guide' component={Guide} authLevel={["admin", "user"]} />
+            <ProtectedRoute exact path='/area/:id' component={Guide} authLevel={["admin", "user"]} />
+            <ProtectedRoute exact path='/wall/:id' component={Guide} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/members' component={MemberTab} authLevel={["admin"]} />
             <AuthRoute exact path='/login' component={Login} />
             <AuthRoute exact path='/register' component={Register} />

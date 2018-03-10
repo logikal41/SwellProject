@@ -5,7 +5,9 @@ class Api::AreasController < ApplicationController
     end
   
     def show
-      render json: Area.find(params[:id])
+      area = Area.find(params[:id])
+      walls = area.walls
+      render json: { area: area, walls: walls }
     end
   
     def update

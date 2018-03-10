@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180304174931) do
+ActiveRecord::Schema.define(version: 20180310171218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "areas", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "group_id"
+    t.index ["group_id"], name: "index_areas_on_group_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
@@ -85,6 +94,7 @@ ActiveRecord::Schema.define(version: 20180304174931) do
     t.index ["area_id"], name: "index_walls_on_area_id"
   end
 
+  add_foreign_key "areas", "groups"
   add_foreign_key "routes", "walls"
   add_foreign_key "walls", "areas"
 end

@@ -1,19 +1,19 @@
 import { combineReducers } from 'redux';
 import user from './reducer_user';
 import flash from './reducer_flash';
-import areas from './reducer_areas';
 import members from './reducer_members';
-import walls from './reducer_walls';
 import selectedArea from './reducer_selectedArea';
 import selectedWall from './reducer_selectedWall';
+import selectedGroup from './reducer_selectedGroup';
+import selectedRoute from './reducer_selectedRoute';
 
 const rootReducer = combineReducers({
   user,
   flash,
-  areas,
+  selectedGroup,
   selectedArea,
-  walls,
   selectedWall,
+  selectedRoute,
   members,
 });
 

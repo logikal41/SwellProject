@@ -5,7 +5,9 @@ class Api::WallsController < ApplicationController
     end
 
     def show
-        render json: Wall.find(params[:id])
+        wall = Wall.find(params[:id])
+        routes = wall.routes
+        render json: { wall: wall, routes: routes }
     end
 
     def update

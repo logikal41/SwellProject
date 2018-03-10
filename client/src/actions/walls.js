@@ -20,6 +20,6 @@ export const getWalls = (area_id) => {
 
   export const selectWall= (wall) => {
     return dispatch => {
-      dispatch({ type: SELECT_WALL, wall: wall });
+      dispatch({ type: SELECT_WALL, payload: wall });
     }
   }

@@ -9,6 +9,8 @@ const userOptions = [{text: 'All', value: 'all'}, {text: 'Administrator', value:
 class MemberList extends React.Component {
     state = { role: 'all', members: [] }
 
+    // does the members list need to be a part of the redux store or can this just be a component state
+
     componentDidMount() {
         this.props.dispatch(getMembers());
     }
