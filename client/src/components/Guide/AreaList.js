@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { List, Header, Container } from 'semantic-ui-react';
+import { List, Header, Container, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'; // desconstruct withRouter here when doing updates and deletes
+import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { setHeaders } from '../../actions/headers';
 import { setFlash } from '../../actions/flash';
 import { selectGroup } from '../../actions/groups';
+import Map from './Map';
 
 class AreaList extends Component {
   state={ areas: [] };
@@ -23,6 +24,10 @@ class AreaList extends Component {
     })
   }
 
+  renderCreate = () => {
+    this.props.history.push('/area/new');
+  }
+
 
   render() {
     const { areas } = this.state;
@@ -32,7 +37,8 @@ class AreaList extends Component {
     } else {
       return (
         <Container>
-          {/* <Button onClick={() => this.toggleCreate()}>Create Area</Button> */}
+          <Map />
+          <Button onClick={() => this.renderCreate()}>New Area</Button>
           <Header as='h1' textAlign='center'>Area List</Header>
           <List>
             { areas.map( area => {
@@ -49,4 +55,4 @@ class AreaList extends Component {
   }
 }
 
-export default connect()(AreaList);
+export default withRouter(connect()(AreaList));

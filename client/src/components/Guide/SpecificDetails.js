@@ -1,9 +1,9 @@
 import React from 'react';
-import { Header, Container } from 'semantic-ui-react';
+import { List, Header, Container, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { selectArea } from '../../actions/areas';
-import { selectWall } from '../../actions/walls';
+import { selectArea, deleteArea } from '../../actions/areas';
+import { selectWall, deleteWall } from '../../actions/walls';
 
 
 class specificDetails extends React.Component {
@@ -15,25 +15,45 @@ class specificDetails extends React.Component {
     }
 
     renderNavLinks = (type) => {
-        const { id, name } = this.props.dataList;
-        const { dispatch } = this.props;
+        const { dispatch, dataList } = this.props;
 
         switch(type){
             case 'Area': {
                 return (
                     <Container>
-                        <Link to='/guide' onClick={() => dispatch(selectArea(null))}>
-                            {this.props.selectedGroup.name}</Link>
+                        <List>
+                            <List.Item>
+                                <Link to='/guide' onClick={() => dispatch(selectArea(null))}>
+                                    {this.props.selectedGroup.name}</Link>
+                            </List.Item>
+                            <List.Item>
+                                {/* line break */}
+                            </List.Item>
+                            <List.Item>
+                                <Button onClick={()=>dispatch(deleteArea(dataList.id))}>Delete</Button>
+                            </List.Item>
+                        </List>
                     </Container>
                 )
             }
             case 'Wall': {
                 return (
                     <Container>
-                        <Link to='/guide' onClick={() => this.clearBoth()}>
-                            {this.props.selectedGroup.name} > </Link>
-                        <Link to={`/area/${this.props.selectedArea.id}`} onClick={() => dispatch(selectWall(null))}>
-                            {this.props.selectedArea.name}</Link>
+                        <List>
+                            <List.Item>
+                                <Link to='/guide' onClick={() => this.clearBoth()}>
+                                    {this.props.selectedGroup.name} > </Link>
+                                <Link to={`/area/${this.props.selectedArea.id}`} onClick={() => dispatch(selectWall(null))}>
+                                    {this.props.selectedArea.name}</Link>
+                            </List.Item>
+                            <List.Item>
+                                {/* line break */}
+                            </List.Item>
+                            <List.Item>
+                                <Button onClick={()=>dispatch(deleteWall(dataList.id))}>Delete</Button>
+                            </List.Item>
+                        </List>
+
                     </Container>
                 )
             }

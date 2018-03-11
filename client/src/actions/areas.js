@@ -23,9 +23,8 @@ export const getAreas = () => {
 
   export const deleteArea = (id) => {
     return dispatch => {
-    axios.delete(`api/areas/${id}`)
+    axios.delete(`../api/areas/${id}`)
       .then( res => {
-        dispatch({ type: DELETE_AREA, id });
         dispatch(setHeaders(res.headers));
       })
       .catch( err => {
@@ -49,9 +48,9 @@ export const getAreas = () => {
 
   export const createArea = ({name, description}) => {
     return dispatch => {
-    axios.post('api/areas', { name, description })
+    axios.post('../api/areas', { group_id: 1, name, description })
       .then( res => {
-        dispatch({ type: CREATE_AREA, area: res.data });
+        dispatch({ type: CREATE_AREA, payload: res.data });
         dispatch(setHeaders(res.headers));
       })
       .catch( err => {

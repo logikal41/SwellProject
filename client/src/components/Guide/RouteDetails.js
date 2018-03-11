@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { List, Header, Container, Button } from 'semantic-ui-react';
-import { selectRoute } from '../../actions/routes';
+import { selectRoute, deleteRoute } from '../../actions/routes';
 import { selectWall } from '../../actions/walls';
 import { selectArea } from '../../actions/areas';
 import { Link } from 'react-router-dom';
@@ -41,6 +41,7 @@ class RouteDetails extends React.Component {
         return (
             <Container>
                 {this.renderNavLinks()}
+                <Button onClick={() => dispatch(deleteRoute(selectedRoute.id))}>Delete</Button>
                 <Header as='h1' textAlign='center'>Route Details</Header>
                 <List>
                     <List.Item>Route Name: {selectedRoute.name}</List.Item>

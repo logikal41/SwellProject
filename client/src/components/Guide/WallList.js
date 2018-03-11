@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { List, Header, Container } from 'semantic-ui-react';
+import { List, Header, Container, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'; // desconstruct withRouter here when doing updates and deletes
+import { Link, withRouter } from 'react-router-dom'; // desconstruct withRouter here when doing updates and deletes
 import axios from 'axios';
 import { setHeaders } from '../../actions/headers';
 import { setFlash } from '../../actions/flash';
 import { selectArea } from '../../actions/areas';
+import Map from './Map';
 
 class WallList extends Component {
   state={ walls: [] };
@@ -23,6 +24,10 @@ class WallList extends Component {
     })
   }
 
+  renderCreate = () => {
+    this.props.history.push('/wall/new');
+  }
+
 
   render() {
     const { walls } = this.state;
@@ -32,7 +37,8 @@ class WallList extends Component {
     } else {
       return (
         <Container>
-          {/* <Button onClick={() => this.toggleCreate()}>Create Area</Button> */}
+          <Map />
+          <Button onClick={() => this.renderCreate()}>New Wall</Button>
           <Header as='h1' textAlign='center'>Wall List</Header>
           <List>
             { walls.map( wall => {
@@ -49,4 +55,4 @@ class WallList extends Component {
   }
 }
 
-export default connect()(WallList);
+export default withRouter(connect()(WallList));

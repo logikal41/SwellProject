@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { List, Header, Container } from 'semantic-ui-react';
+import { List, Header, Container, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'; // desconstruct withRouter here when doing updates and deletes
+import { withRouter } from 'react-router-dom'; 
 import axios from 'axios';
 import { setHeaders } from '../../actions/headers';
 import { setFlash } from '../../actions/flash';
@@ -25,6 +25,11 @@ class RouteList extends Component {
     })
   }
 
+
+  renderCreate = () => {
+    this.props.history.push('/route/new');
+  }
+
   render() {
     const { routes } = this.state;
 
@@ -33,7 +38,7 @@ class RouteList extends Component {
     } else {
       return (
         <Container>
-          {/* <Button onClick={() => this.toggleCreate()}>Create Area</Button> */}
+         <Button onClick={() => this.renderCreate()}>New Route</Button>
           <Header as='h1' textAlign='center'>Route List</Header>
           <List>
             { routes.map( route => {
@@ -50,4 +55,4 @@ class RouteList extends Component {
   }
 }
 
-export default connect()(RouteList);
+export default withRouter(connect()(RouteList));

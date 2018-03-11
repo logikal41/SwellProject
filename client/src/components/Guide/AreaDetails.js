@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header, Container, Button } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import SpecificDetails from './SpecificDetails';
 
 class AreaDetails extends React.Component {
