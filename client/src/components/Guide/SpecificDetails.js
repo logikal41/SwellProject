@@ -19,15 +19,11 @@ class specificDetails extends React.Component {
         const { dispatch } = this.props;
 
         switch(type){
-            case 'Group': {
-                return <Link to='/guide'>{name}</Link>
-            }
             case 'Area': {
                 return (
                     <Container>
                         <Link to='/guide' onClick={() => dispatch(selectArea(null))}>
-                            {this.props.selectedGroup.name} > </Link>
-                        <Link to={`/area/${id}`}>{name}</Link>
+                            {this.props.selectedGroup.name}</Link>
                     </Container>
                 )
             }
@@ -37,13 +33,12 @@ class specificDetails extends React.Component {
                         <Link to='/guide' onClick={() => this.clearBoth()}>
                             {this.props.selectedGroup.name} > </Link>
                         <Link to={`/area/${this.props.selectedArea.id}`} onClick={() => dispatch(selectWall(null))}>
-                            {this.props.selectedArea.name} > </Link>
-                        <Link to={`/wall/${id}`}>{name}</Link>
+                            {this.props.selectedArea.name}</Link>
                     </Container>
                 )
             }
             default: {
-                return <div>Select a group!!!</div>
+                return <div></div>
             }
         }
     }
