@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { List, Header, Container } from 'semantic-ui-react';
+import { List, Header, Container, Button } from 'semantic-ui-react';
+import { selectRoute } from '../../actions/routes';
 
 class RouteDetails extends React.Component {
     render() {
         
-        const { selectedRoute } = this.props;
+        const { selectedRoute, dispatch } = this.props;
 
         return (
             <Container>
@@ -21,6 +22,7 @@ class RouteDetails extends React.Component {
                     <List.Item>Required Gear: {selectedRoute.gear}</List.Item>
                     <List.Item>Descent: {selectedRoute.descent}</List.Item>
                 </List>
+                <Button onClick={() => dispatch(selectRoute(null))}>Go Back</Button>
             </Container>
         )
     }
