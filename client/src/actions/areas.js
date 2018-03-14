@@ -2,65 +2,51 @@ import axios from 'axios';
 import { setHeaders } from './headers';
 import { setFlash } from './flash';
 
-export const GET_AREAS = 'GET_AREAS';
-export const DELETE_AREA = 'DELETE_AREA';
 export const UPDATE_AREA = 'UPDATE_AREA';
-export const CREATE_AREA = 'CREATE_AREA';
 export const SELECT_AREA = 'SELECT_AREA';
 
-export const getAreas = () => {
+
+export const deleteArea = (id, callBack) => {
   return dispatch => {
-    axios.get('/api/areas')
-      .then( res => {
-        dispatch({ type: GET_AREAS, areas: res.data });
-        dispatch(setHeaders(res.headers));
-      })
-      .catch( err => {
-        dispatch(setFlash('Failed to get areas', 'red'));
-      })
-   }
-  };
+  axios.delete(`../api/areas/${id}`)
+    .then( res => {
+      dispatch(setHeaders(res.headers));
+    })
+    .then( () => callBack() )
+    .catch( err => {
+      dispatch(setFlash('Failed to delete Area', 'red'));
+    })  
+  } 
+}
 
-  export const deleteArea = (id) => {
-    return dispatch => {
-    axios.delete(`../api/areas/${id}`)
-      .then( res => {
-        dispatch(setHeaders(res.headers));
-      })
-      .catch( err => {
-        dispatch(setFlash('Failed to delete Area', 'red'));
-      })  
-    } 
-  }
+export const updateArea = ({id, name, description}) => {
+  return dispatch => {
+  axios.put(`api/areas/${id}`, { name, description })
+    .then( res => {
+      dispatch({ type: UPDATE_AREA, area: res.data });
+      dispatch(setHeaders(res.headers));
+    })
+    .catch( err => {
+      dispatch(setFlash('Failed to update area', 'red'));
+    })  
+  } 
+}
 
-  export const updateArea = ({id, name, description}) => {
-    return dispatch => {
-    axios.put(`api/areas/${id}`, { name, description })
-      .then( res => {
-        dispatch({ type: UPDATE_AREA, area: res.data });
-        dispatch(setHeaders(res.headers));
-      })
-      .catch( err => {
-        dispatch(setFlash('Failed to update area', 'red'));
-      })  
-    } 
-  }
+export const createArea = ({name, description}, callBack) => {
+  return dispatch => {
+  axios.post('../api/areas', { group_id: 1, name, description })
+    .then( res => {
+      dispatch(setHeaders(res.headers));
+    })
+    .then( () => callBack() )
+    .catch( err => {
+      dispatch(setFlash('Failed to create area', 'red'));
+    })  
+  } 
+}
 
-  export const createArea = ({name, description}) => {
-    return dispatch => {
-    axios.post('../api/areas', { group_id: 1, name, description })
-      .then( res => {
-        dispatch({ type: CREATE_AREA, payload: res.data });
-        dispatch(setHeaders(res.headers));
-      })
-      .catch( err => {
-        dispatch(setFlash('Failed to create area', 'red'));
-      })  
-    } 
+export const selectArea = (area) => {
+  return dispatch => {
+    dispatch({ type: SELECT_AREA, payload: area });
   }
-
-  export const selectArea = (area) => {
-    return dispatch => {
-      dispatch({ type: SELECT_AREA, payload: area });
-    }
-  }
+}

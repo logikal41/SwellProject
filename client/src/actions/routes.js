@@ -10,14 +10,15 @@ export const selectRoute = (route) => {
     }
   }
 
-  export const createRoute = ({ id, name, description}) => {
+  export const createRoute = ({ id, name, description}, callBack) => {
     return dispatch => {
     axios.post('../api/routes', { wall_id: id, name, description })
       .then( res => {
         dispatch(setHeaders(res.headers));
       })
+      .then( () => callBack() )
       .catch( err => {
-        dispatch(setFlash('Failed to create wall', 'red'));
+        dispatch(setFlash('Failed to create route', 'red'));
       })  
     } 
   }
@@ -29,7 +30,7 @@ export const selectRoute = (route) => {
         dispatch(setHeaders(res.headers));
       })
       .catch( err => {
-        dispatch(setFlash('Failed to delete Route', 'red'));
+        dispatch(setFlash('Failed to delete route', 'red'));
       })  
     } 
   }

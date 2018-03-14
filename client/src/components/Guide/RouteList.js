@@ -25,7 +25,6 @@ class RouteList extends Component {
     })
   }
 
-
   renderCreate = () => {
     this.props.history.push('/route/new');
   }
@@ -43,7 +42,10 @@ class RouteList extends Component {
           <List>
             { routes.map( route => {
               return (
-                <List.Item key={route.id} onClick={() => this.props.dispatch(selectRoute(route))}>
+                <List.Item 
+                  key={route.id} 
+                  onClick={() => this.props.dispatch(selectRoute(route))}
+                  >
                   {route.name}
                 </List.Item>
               )

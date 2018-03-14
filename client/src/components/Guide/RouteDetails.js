@@ -21,6 +21,12 @@ class RouteDetails extends React.Component {
         dispatch(selectArea(null));
     }
 
+    resetRoutes = () => {
+        const { dispatch, selectedRoute } = this.props;
+        dispatch(deleteRoute(selectedRoute.id));
+        dispatch(selectRoute(null));
+    }
+
     renderNavLinks = () => {
         const { dispatch } = this.props;
         return (
@@ -36,12 +42,12 @@ class RouteDetails extends React.Component {
 
     render() {
         
-        const { selectedRoute, dispatch } = this.props;
+        const { selectedRoute } = this.props;
 
         return (
             <Container>
                 {this.renderNavLinks()}
-                <Button onClick={() => dispatch(deleteRoute(selectedRoute.id))}>Delete</Button>
+                <Button onClick={() => this.resetRoutes() }>Delete</Button>
                 <Header as='h1' textAlign='center'>Route Details</Header>
                 <List>
                     <List.Item>Route Name: {selectedRoute.name}</List.Item>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Header, Container, Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { selectArea, deleteArea } from '../../actions/areas';
 import { selectWall, deleteWall } from '../../actions/walls';
@@ -15,7 +15,7 @@ class specificDetails extends React.Component {
     }
 
     renderNavLinks = (type) => {
-        const { dispatch, dataList } = this.props;
+        const { dispatch, dataList, history } = this.props;
 
         switch(type){
             case 'Area': {
@@ -30,7 +30,7 @@ class specificDetails extends React.Component {
                                 {/* line break */}
                             </List.Item>
                             <List.Item>
-                                <Button onClick={()=>dispatch(deleteArea(dataList.id))}>Delete</Button>
+                                <Button onClick={()=>dispatch(deleteArea(dataList.id, () => history.push('/guide') ))}>Delete</Button>
                             </List.Item>
                         </List>
                     </Container>
@@ -50,7 +50,7 @@ class specificDetails extends React.Component {
                                 {/* line break */}
                             </List.Item>
                             <List.Item>
-                                <Button onClick={()=>dispatch(deleteWall(dataList.id))}>Delete</Button>
+                                <Button onClick={()=>dispatch(deleteWall(dataList.id, () => history.push(`/area/${this.props.selectedArea.id}`)))}>Delete</Button>
                             </List.Item>
                         </List>
 
@@ -90,4 +90,6 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps)(specificDetails);
+export default withRouter(
+    connect(mapStateToProps)(specificDetails)
+);

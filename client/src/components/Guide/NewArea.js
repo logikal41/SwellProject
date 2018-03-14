@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Header, Container } from 'semantic-ui-react';
 import { createArea } from '../../actions/areas';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+// import { withRouter } from 'react-router-dom'
 
 class NewArea extends React.Component {
     state = { name: '', description: ''};
@@ -15,8 +15,7 @@ class NewArea extends React.Component {
 
     handleSubmit = () => {
         const { name, description } = this.state;
-        this.props.dispatch(createArea({ name, description }));
-        this.props.history.push('/guide');
+        this.props.dispatch(createArea({ name, description }, () => this.props.history.push('/guide') ));
     }
 
     render() {
@@ -45,4 +44,4 @@ class NewArea extends React.Component {
     } 
 }
 
-export default withRouter(connect()(NewArea));
+export default connect()(NewArea);

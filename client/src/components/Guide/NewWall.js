@@ -2,7 +2,6 @@ import React from 'react';
 import { Form, Header, Container } from 'semantic-ui-react';
 import { createWall } from '../../actions/walls';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
 
 class NewWall extends React.Component {
     state = { name: '', description: ''};
@@ -16,8 +15,7 @@ class NewWall extends React.Component {
     handleSubmit = () => {
         const { name, description } = this.state;
         const { id } = this.props.selectedArea;
-        this.props.dispatch(createWall({ id, name, description }));
-        this.props.history.push(`/area/${id}`);
+        this.props.dispatch(createWall({ id, name, description }, () => this.props.history.push(`/area/${id}`) ));
     }
 
     render() {
@@ -50,4 +48,4 @@ const mapStateToProps = ({ selectedArea }) => {
     return { selectedArea }
 }
 
-export default withRouter(connect(mapStateToProps)(NewWall));
+export default connect(mapStateToProps)(NewWall);

@@ -2,7 +2,6 @@ import React from 'react';
 import { Form, Header, Container, Button } from 'semantic-ui-react';
 import { createRoute } from '../../actions/routes';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
 
 class NewRoute extends React.Component {
     state = { name: '', description: ''};
@@ -16,8 +15,7 @@ class NewRoute extends React.Component {
     handleSubmit = () => {
         const { name, description } = this.state;
         const { id } = this.props.selectedWall;
-        this.props.dispatch(createRoute({ id, name, description }));
-        this.props.history.push(`/wall/${id}`);
+        this.props.dispatch(createRoute({ id, name, description }, () => this.props.history.push(`/wall/${id}`) ));
     }
 
     render() {
@@ -51,4 +49,4 @@ const mapStateToProps = ({ selectedWall }) => {
     return { selectedWall }
 }
 
-export default withRouter(connect(mapStateToProps)(NewRoute));
+export default connect(mapStateToProps)(NewRoute);

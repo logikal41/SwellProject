@@ -27,7 +27,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/invitation/accept' component={InviteConfirmation} />
-            <ProtectedRoute exact path='/bio' component={Bio} />
+            <Route exact path='/bio' component={Bio} />
             <ProtectedRoute exact path='/guide' component={Guide} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/area/new' component={NewArea} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/area/:id' component={Guide} authLevel={["admin", "user"]} />
