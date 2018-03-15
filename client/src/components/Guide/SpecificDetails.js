@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { selectArea, deleteArea } from '../../actions/areas';
 import { selectWall, deleteWall } from '../../actions/walls';
+import { clearRoutes } from '../../actions/routes';
 
 
 class specificDetails extends React.Component {
@@ -12,6 +13,19 @@ class specificDetails extends React.Component {
         const { dispatch } = this.props;
         dispatch(selectArea(null));
         dispatch(selectWall(null));
+        dispatch(clearRoutes());
+    }
+
+    clearArea = () => {
+        const { dispatch } = this.props;
+        dispatch(selectArea(null));
+        dispatch(clearRoutes());
+    }
+
+    clearWall = () => {
+        const { dispatch } = this.props;
+        dispatch(selectWall(null));
+        dispatch(clearRoutes());
     }
 
     renderNavLinks = (type) => {
@@ -23,7 +37,7 @@ class specificDetails extends React.Component {
                     <Container>
                         <List>
                             <List.Item>
-                                <Link to='/guide' onClick={() => dispatch(selectArea(null))}>
+                                <Link to='/guide' onClick={() => dispatch(this.clearArea())}>
                                     {this.props.selectedGroup.name}</Link>
                             </List.Item>
                             <List.Item>
@@ -43,7 +57,7 @@ class specificDetails extends React.Component {
                             <List.Item>
                                 <Link to='/guide' onClick={() => this.clearBoth()}>
                                     {this.props.selectedGroup.name} > </Link>
-                                <Link to={`/area/${this.props.selectedArea.id}`} onClick={() => dispatch(selectWall(null))}>
+                                <Link to={`/area/${this.props.selectedArea.id}`} onClick={() => dispatch(this.clearWall())}>
                                     {this.props.selectedArea.name}</Link>
                             </List.Item>
                             <List.Item>

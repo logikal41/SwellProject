@@ -5,24 +5,14 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { setHeaders } from '../../actions/headers';
 import { setFlash } from '../../actions/flash';
-import { selectWall } from '../../actions/walls';
-import { selectRoute } from '../../actions/routes';
+import { selectRoute, getRoutes } from '../../actions/routes';
 
 
 class RouteList extends Component {
-  state={ routes: [] };
 
   componentDidMount() {
     const { dispatch, wall_id } = this.props;
-    axios.get(`/api/walls/${wall_id}`)
-    .then( res => {
-      this.setState({ routes: res.data.routes});
-      dispatch(selectWall(res.data.wall));
-      dispatch(setHeaders(res.headers));
-    })
-    .catch( err => {
-      dispatch(setFlash('Failed to get routes', 'red'));
-    })
+    dispatch(getRoutes(wall_id));
   }
 
   renderCreate = () => {
@@ -30,7 +20,7 @@ class RouteList extends Component {
   }
 
   render() {
-    const { routes } = this.state;
+    const { routes } = this.props;
 
     if ( routes.length === 0) {
       return <Header as='h1' textAlign='center'>Loading...</Header>
@@ -57,4 +47,8 @@ class RouteList extends Component {
   }
 }
 
-export default withRouter(connect()(RouteList));
+const mapStateToProps = ({ routes }) => {
+  return { routes };
+}
+
+export default withRouter(connect(mapStateToProps)(RouteList));

@@ -6,6 +6,7 @@ import selectedArea from './reducer_selectedArea';
 import selectedWall from './reducer_selectedWall';
 import selectedGroup from './reducer_selectedGroup';
 import selectedRoute from './reducer_selectedRoute';
+import routes from './reducer_routes';
 
 const rootReducer = combineReducers({
   user,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   selectedWall,
   selectedRoute,
   members,
+  routes,
 });
 
 export default rootReducer;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { List, Header, Container, Button } from 'semantic-ui-react';
-import { selectRoute, deleteRoute } from '../../actions/routes';
+import { selectRoute, deleteRoute, clearRoutes } from '../../actions/routes';
 import { selectWall } from '../../actions/walls';
 import { selectArea } from '../../actions/areas';
 import { Link } from 'react-router-dom';
@@ -12,6 +12,7 @@ class RouteDetails extends React.Component {
         const { dispatch } = this.props;
         dispatch(selectRoute(null));
         dispatch(selectWall(null));
+        dispatch(clearRoutes());
     }
 
     clearAll = () => {
@@ -19,6 +20,7 @@ class RouteDetails extends React.Component {
         dispatch(selectRoute(null));
         dispatch(selectWall(null));
         dispatch(selectArea(null));
+        dispatch(clearRoutes());
     }
 
     resetRoutes = () => {
