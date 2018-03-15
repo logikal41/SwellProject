@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { List, Header, Container, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'; 
-import axios from 'axios';
-import { setHeaders } from '../../actions/headers';
-import { setFlash } from '../../actions/flash';
 import { selectRoute, getRoutes } from '../../actions/routes';
 
 

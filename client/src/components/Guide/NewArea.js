@@ -2,7 +2,6 @@ import React from 'react';
 import { Form, Header, Container } from 'semantic-ui-react';
 import { createArea } from '../../actions/areas';
 import { connect } from 'react-redux';
-// import { withRouter } from 'react-router-dom'
 
 class NewArea extends React.Component {
     state = { name: '', description: ''};

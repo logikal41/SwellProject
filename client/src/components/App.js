@@ -8,6 +8,7 @@ import Home from './Home';
 import Guide from './Guide/Guide';
 import Bio from './Bio';
 import NewArea from './Guide/NewArea';
+import NewAreaForm from './Guide/NewAreaForm';
 import NewWall from './Guide/NewWall';
 import NewRoute from './Guide/NewRoute';
 import MemberTab from './Members/MemberTab';
@@ -29,7 +30,7 @@ class App extends Component {
             <Route exact path='/invitation/accept' component={InviteConfirmation} />
             <Route exact path='/bio' component={Bio} />
             <ProtectedRoute exact path='/guide' component={Guide} authLevel={["admin", "user"]} />
-            <ProtectedRoute exact path='/area/new' component={NewArea} authLevel={["admin", "user"]} />
+            <ProtectedRoute exact path='/area/new' component={NewAreaForm} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/area/:id' component={Guide} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/wall/new' component={NewWall} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/wall/:id' component={Guide} authLevel={["admin", "user"]} />
