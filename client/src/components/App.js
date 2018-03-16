@@ -8,8 +8,8 @@ import Home from './Home';
 import Guide from './Guide/Guide';
 import Bio from './Bio';
 import NewAreaForm from './Guide/NewAreaForm';
-import NewWall from './Guide/NewWall';
-import NewRoute from './Guide/NewRoute';
+import NewWallForm from './Guide/NewWallForm';
+import NewRouteForm from './Guide/NewRouteForm';
 import MemberTab from './Members/MemberTab';
 import InviteConfirmation from './InviteConfirmation';
 import ProtectedRoute from './ProtectedRoute';
@@ -31,9 +31,9 @@ class App extends Component {
             <ProtectedRoute exact path='/guide' component={Guide} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/area/new' component={NewAreaForm} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/area/:id' component={Guide} authLevel={["admin", "user"]} />
-            <ProtectedRoute exact path='/wall/new' component={NewWall} authLevel={["admin", "user"]} />
+            <ProtectedRoute exact path='/wall/new' component={NewWallForm} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/wall/:id' component={Guide} authLevel={["admin", "user"]} />
-            <ProtectedRoute exact path='/route/new' component={NewRoute} authLevel={["admin", "user"]} />
+            <ProtectedRoute exact path='/route/new' component={NewRouteForm} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/members' component={MemberTab} authLevel={["admin"]} />
             <AuthRoute exact path='/login' component={Login} />
             <AuthRoute exact path='/register' component={Register} />

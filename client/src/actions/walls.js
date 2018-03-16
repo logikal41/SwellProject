@@ -11,13 +11,13 @@ export const SELECT_WALL = 'SELECT_WALL';
     }
   }
 
-  export const createWall = ({ id, name, description}, callBack) => {
+  export const createWall = ( {id, name, description} , callBack ) => {
     return dispatch => {
     axios.post('../api/walls', { area_id: id, name, description })
       .then( res => {
         dispatch(setHeaders(res.headers));
+        callBack();
       })
-      .then(() => callBack())
       .catch( err => {
         dispatch(setFlash('Failed to create wall', 'red'));
       })  

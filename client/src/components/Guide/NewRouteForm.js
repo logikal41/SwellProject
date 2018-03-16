@@ -1,10 +1,10 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Form, Header, Container } from 'semantic-ui-react';
-import { createArea } from '../../actions/areas';
+import { createRoute } from '../../actions/routes';
 import { connect } from 'react-redux';
 
-class NewAreaForm extends React.Component {
+class NewRouteForm extends React.Component {
 
     renderField = (field) => {
         return (
@@ -21,7 +21,8 @@ class NewAreaForm extends React.Component {
 
     onSubmit = (values) => {
         const { dispatch, history } = this.props;
-        dispatch(createArea(values, () => history.push('/guide') ));
+        const { id } = this.props.selectedWall;
+        dispatch(createRoute( { id , ...values }, () => history.push(`/wall/${id}`) ));
     }
 
     render() {
@@ -29,15 +30,15 @@ class NewAreaForm extends React.Component {
 
         return (
             <Container>
-                <Header as='h1' textAlign='center'>New Area Form</Header>
+                <Header as='h1' textAlign='center'>New Route Form</Header>
                 <Form onSubmit={ handleSubmit(this.onSubmit) }>
                     <Field
-                        label='Name of Area'
+                        label='Name of Route'
                         name='name'
                         component={this.renderField}
                     />
                     <Field
-                        label='Area Description'
+                        label='Route Description'
                         name='description'
                         component={this.renderField}
                     />
@@ -52,16 +53,22 @@ const validate = (values) => {
     const errors = {};
 
     if (!values.name) {
-        errors.name = "Enter an area name";
+        errors.name = "Enter a route name";
     }
     if (!values.description) {
-        errors.description = "Enter an area description";
+        errors.description = "Enter a route description";
     }
 
     return errors;
 }
 
+const mapStateToProps = ({ selectedWall }) => {
+    return { 
+        selectedWall,
+     }
+};
+
 export default reduxForm({
     validate,
-    form: 'NewAreaForm'
-})(NewAreaForm);
+    form: 'NewRouteForm'
+})(connect(mapStateToProps)(NewRouteForm));
