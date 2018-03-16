@@ -34,9 +34,9 @@ export const getRoutes = (wall_id) => {
     }
 }
 
-export const createRoute = ({ id, name, description}, callBack) => {
+export const createRoute = ( values, callBack) => {
   return dispatch => {
-  axios.post('../api/routes', { wall_id: id, name, description })
+  axios.post('../api/routes', values )
     .then( res => {
       dispatch(setHeaders(res.headers));
     })

@@ -22,7 +22,7 @@ class NewRouteForm extends React.Component {
     onSubmit = (values) => {
         const { dispatch, history } = this.props;
         const { id } = this.props.selectedWall;
-        dispatch(createRoute( { id , ...values }, () => history.push(`/wall/${id}`) ));
+        dispatch(createRoute( { wall_id: id , ...values }, () => history.push(`/wall/${id}`) ));
     }
 
     render() {
@@ -37,9 +37,39 @@ class NewRouteForm extends React.Component {
                         name='name'
                         component={this.renderField}
                     />
+                     <Field
+                        label='Difficulty of Route'
+                        name='difficulty'
+                        component={this.renderField}
+                    />
+                     <Field
+                        label='Number of pitches'
+                        name='pitch'
+                        component={this.renderField}
+                    />
+                     <Field
+                        label='Length of Route'
+                        name='length'
+                        component={this.renderField}
+                    />
+                     <Field
+                        label='First ascensionist'
+                        name='first_ascent'
+                        component={this.renderField}
+                    />
                     <Field
                         label='Route Description'
                         name='description'
+                        component={this.renderField}
+                    />
+                    <Field
+                        label='Gear'
+                        name='gear'
+                        component={this.renderField}
+                    />
+                    <Field
+                        label='Descent Description'
+                        name='descent'
                         component={this.renderField}
                     />
                     <Form.Button positive>Submit</Form.Button>

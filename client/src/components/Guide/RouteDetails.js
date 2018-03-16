@@ -56,7 +56,6 @@ class RouteDetails extends React.Component {
                     <List.Item>Difficulty: {selectedRoute.difficulty}</List.Item>
                     <List.Item>Pitch Count: {selectedRoute.pitch}</List.Item>
                     <List.Item>Route length: {selectedRoute.length}</List.Item>
-                    <List.Item>Rating: {selectedRoute.rating}</List.Item>
                     <List.Item>First Ascent: {selectedRoute.first_ascent}</List.Item>
                     <List.Item>Description: {selectedRoute.description}</List.Item>
                     <List.Item>Required Gear: {selectedRoute.gear}</List.Item>
