@@ -7,7 +7,6 @@ import Flash from './Flash';
 import Home from './Home';
 import Guide from './Guide/Guide';
 import Bio from './Bio';
-import NewArea from './Guide/NewArea';
 import NewAreaForm from './Guide/NewAreaForm';
 import NewWall from './Guide/NewWall';
 import NewRoute from './Guide/NewRoute';
