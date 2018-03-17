@@ -14,10 +14,10 @@ class Guide extends React.Component {
                 return <AreaList />
             }
             case '/area/:id': {
-                return <WallList area_id={params.id} />
+                return <WallList />
             }
             case '/wall/:id': {
-                return <RouteList wall_id={params.id} />
+                return <RouteList />
             }
             default: {
                 return <div>Select a group!!!</div>
