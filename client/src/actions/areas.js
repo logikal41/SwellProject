@@ -3,8 +3,6 @@ import { setHeaders } from './headers';
 import { setFlash } from './flash';
 
 export const UPDATE_AREA = 'UPDATE_AREA';
-export const SELECT_AREA = 'SELECT_AREA';
-
 
 export const deleteArea = (id, callBack) => {
   return dispatch => {
@@ -43,10 +41,4 @@ export const createArea = ({name, description}, callBack) => {
       dispatch(setFlash('Failed to create area', 'red'));
     })  
   } 
-}
-
-export const selectArea = (area) => {
-  return dispatch => {
-    dispatch({ type: SELECT_AREA, payload: area });
-  }
 }
