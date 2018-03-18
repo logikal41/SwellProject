@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Container, Header } from 'semantic-ui-react';
 import { setHeaders } from '../../actions/headers';
 import { setFlash } from '../../actions/flash';
+import { selectArea } from '../../actions/areas';
 
 class AreaDetails extends React.Component {
     state={ area: {} };
@@ -24,6 +25,7 @@ class AreaDetails extends React.Component {
 
       render() {
         const { area } = this.state;
+        const { dispatch } = this.props;
 
         if ( !area ) {
             return <div> Loading... </div>
@@ -31,7 +33,7 @@ class AreaDetails extends React.Component {
 
         return (
             <Container>
-                <Link to='/guide'>San Rafael Swell - North</Link>
+                <Link to='/guide' onClick={()=>dispatch(selectArea(null))}>San Rafael Swell - North</Link>
                 <Header as='h3'>Area Name: {area.name} </Header>
                 <Header as='h3'>Area Description: {area.description} </Header>
             </Container>

@@ -5,9 +5,12 @@ import { connect } from 'react-redux';
 import { Container, Header } from 'semantic-ui-react';
 import { setHeaders } from '../../actions/headers';
 import { setFlash } from '../../actions/flash';
+import { selectWall } from '../../actions/walls';
+import { clearRoutes } from '../../actions/routes';
+import { selectArea } from '../../actions/areas';
 
 class WallDetails extends React.Component {
-    state={ wall: {} };
+    state={ wall: {}, area_name: '' };
 
     componentDidMount() {
         const { dispatch } = this.props;
@@ -16,13 +19,33 @@ class WallDetails extends React.Component {
         axios.get(`/api/walls/${id}`)
         .then( res => {
           this.setState({ wall: res.data.wall});
+          
+            axios.get(`/api/areaname/${res.data.wall.area_id}`)
+            .then ( res => {
+                this.setState({ area_name: res.data });
+            })
+            .catch( err => { 
+                dispatch(setFlash('Failed to get area name', 'red'));
+            })
+
           dispatch(setHeaders(res.headers));
         })
         .catch( err => {
           dispatch(setFlash('Failed to get wall', 'red'));
         })
+      }
 
-        
+      clearWall = () => {
+          const { dispatch } = this.props;
+          dispatch(selectWall(null));
+          dispatch(clearRoutes());
+      }
+
+      clearAll = () => {
+        const { dispatch } = this.props;
+        dispatch(selectArea(null));
+        dispatch(selectWall(null));
+        dispatch(clearRoutes());
       }
 
       renderNavLinks = () => {
@@ -30,9 +53,9 @@ class WallDetails extends React.Component {
 
           return (
             <Container>
-                <Link to='/guide'>San Rafael Swell - North > </Link>
-                <Link to={`/area/${area_id}`}>
-                    Go back to Area </Link>
+                <Link to='/guide' onClick={() => this.clearAll()}>San Rafael Swell - North > </Link>
+                <Link to={`/area/${area_id}`} onClick={() => this.clearWall()}>
+                    {this.state.area_name} </Link>
             </Container>
           )
       }

@@ -16,7 +16,6 @@ class DetailWindow extends React.Component {
         if ( this.props.selectedRoute ){
             return <RouteDetails />
         }
-
         switch(path) {
             case '/guide':
                 return <GroupDetails />;

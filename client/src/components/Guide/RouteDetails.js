@@ -1,12 +1,39 @@
 import React from 'react';
+import axios from 'axios';
+import { setHeaders } from '../../actions/headers';
+import { setFlash } from '../../actions/flash';
 import { connect } from 'react-redux';
 import { List, Header, Container, Button } from 'semantic-ui-react';
 import { selectRoute, deleteRoute, clearRoutes } from '../../actions/routes';
 import { selectWall } from '../../actions/walls';
 import { selectArea } from '../../actions/areas';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 class RouteDetails extends React.Component {
+    state={ wall: {}, area_name: '' };
+
+    componentDidMount() {
+        const { dispatch } = this.props;
+        const { id } = this.props.match.params;
+       
+        axios.get(`/api/walls/${id}`)
+        .then( res => {
+          this.setState({ wall: res.data.wall});
+          
+            axios.get(`/api/areaname/${res.data.wall.area_id}`)
+            .then ( res => {
+                this.setState({ area_name: res.data });
+            })
+            .catch( err => { 
+                dispatch(setFlash('Failed to get area name', 'red'));
+            })
+
+          dispatch(setHeaders(res.headers));
+        })
+        .catch( err => {
+          dispatch(setFlash('Failed to get wall', 'red'));
+        })
+      }
 
     clearBoth = () => {
         const { dispatch } = this.props;
@@ -31,13 +58,16 @@ class RouteDetails extends React.Component {
 
     renderNavLinks = () => {
         const { dispatch } = this.props;
+        const { wall, area_name } = this.state;
         return (
             <Container>
-                <Link to='/' onClick={() => this.clearAll()}>San Rafael Swell - North > </Link>
-                <Link to={`/area/${this.props.selectedArea.id}`} onClick={() => this.clearBoth()}>
-                    {this.props.selectedArea.name} > </Link>
-                <Link to={`/wall/${this.props.selectedWall.id}`} onClick={() => dispatch(selectRoute(null))} >
-                    {this.props.selectedWall.name}</Link>
+                <Link to='/guide' onClick={() => this.clearAll()}>San Rafael Swell - North > </Link>
+                <Link to={`/area/${wall.area_id}`} onClick={() => this.clearBoth()}>
+                    {area_name} > </Link>
+                <Link to={`/wall/${wall.id}`}
+                    onClick={() => dispatch(selectRoute(null))}>
+                    {wall.name} 
+                </Link>
             </Container>
         )
     }
@@ -48,7 +78,7 @@ class RouteDetails extends React.Component {
 
         return (
             <Container>
-                {/* {this.renderNavLinks()} */}
+                {this.renderNavLinks()}
                 <Button onClick={() => this.resetRoutes() }>Delete</Button>
                 <Header as='h1' textAlign='center'>Route Details</Header>
                 <List>
@@ -75,4 +105,4 @@ const mapStateToProps = (state) => {
      }
 }
 
-export default connect(mapStateToProps)(RouteDetails);
+export default withRouter(connect(mapStateToProps)(RouteDetails));

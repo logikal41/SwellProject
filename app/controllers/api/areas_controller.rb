@@ -9,6 +9,10 @@ class Api::AreasController < ApplicationController
       walls = area.walls
       render json: { area: area, walls: walls }
     end
+
+    def areaname
+      render json: Area.find(params[:id]).name
+    end
   
     def update
       area = Area.find(params[:id])
