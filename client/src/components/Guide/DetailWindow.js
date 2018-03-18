@@ -2,21 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Header, Container } from 'semantic-ui-react';
-import GroupDetails from './GroupDetails';
-import AreaDetails from './AreaDetails';
-import WallDetails from './WallDetails';
-import RouteDetails from './RouteDetails';
+import GroupDetails from './Details/GroupDetails';
+import AreaDetails from './Details/AreaDetails';
+import WallDetails from './Details/WallDetails';
+import RouteDetails from './Details/RouteDetails';
 import Comments from './Comments';
 
 class DetailWindow extends React.Component {
 
     renderDetails = () => {
-        const { path } = this.props.match;
-        
         if ( this.props.selectedRoute ){
             return <RouteDetails />
         }
-        switch(path) {
+        switch(this.props.match.path) {
             case '/guide':
                 return <GroupDetails />;
             case '/area/:id':
@@ -24,7 +22,7 @@ class DetailWindow extends React.Component {
             case '/wall/:id': 
                 return <WallDetails />;
             default:
-                <div> FAILURE IN THE DETAIL WINDOW SWITCH! </div>
+                return <div> Improper url path! </div>
         }
     }
 

@@ -1,12 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import { setHeaders } from '../../actions/headers';
-import { setFlash } from '../../actions/flash';
+import { setHeaders } from '../../../actions/headers';
+import { setFlash } from '../../../actions/flash';
 import { connect } from 'react-redux';
 import { List, Header, Container, Button } from 'semantic-ui-react';
-import { selectRoute, deleteRoute, clearRoutes } from '../../actions/routes';
-import { selectWall } from '../../actions/walls';
-import { selectArea } from '../../actions/areas';
+import { selectRoute, deleteRoute, clearRoutes } from '../../../actions/routes';
 import { Link, withRouter } from 'react-router-dom';
 
 class RouteDetails extends React.Component {
@@ -35,18 +33,9 @@ class RouteDetails extends React.Component {
         })
       }
 
-    clearBoth = () => {
+    clearRouteState = () => {
         const { dispatch } = this.props;
         dispatch(selectRoute(null));
-        dispatch(selectWall(null));
-        dispatch(clearRoutes());
-    }
-
-    clearAll = () => {
-        const { dispatch } = this.props;
-        dispatch(selectRoute(null));
-        dispatch(selectWall(null));
-        dispatch(selectArea(null));
         dispatch(clearRoutes());
     }
 
@@ -61,8 +50,8 @@ class RouteDetails extends React.Component {
         const { wall, area_name } = this.state;
         return (
             <Container>
-                <Link to='/guide' onClick={() => this.clearAll()}>San Rafael Swell - North > </Link>
-                <Link to={`/area/${wall.area_id}`} onClick={() => this.clearBoth()}>
+                <Link to='/guide' onClick={() => this.clearRouteState()}>San Rafael Swell - North > </Link>
+                <Link to={`/area/${wall.area_id}`} onClick={() => this.clearRouteState()}>
                     {area_name} > </Link>
                 <Link to={`/wall/${wall.id}`}
                     onClick={() => dispatch(selectRoute(null))}>
@@ -96,13 +85,8 @@ class RouteDetails extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return { 
-        selectedGroup: state.selectedGroup,
-        selectedArea: state.selectedArea,
-        selectedWall: state.selectedWall,
-        selectedRoute: state.selectedRoute,
-     }
+const mapStateToProps = ({ selectedRoute }) => {
+    return { selectedRoute }
 }
 
 export default withRouter(connect(mapStateToProps)(RouteDetails));

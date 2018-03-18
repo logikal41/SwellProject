@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { List, Header, Container, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import axios from 'axios';
-import { setHeaders } from '../../actions/headers';
-import { setFlash } from '../../actions/flash';
-import Map from './Map';
+import { setHeaders } from '../../../actions/headers';
+import { setFlash } from '../../../actions/flash';
+import Map from '../Map';
 
 class AreaList extends Component {
   state={ areas: [] };

@@ -1,10 +1,24 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Form, Header, Container, Button } from 'semantic-ui-react';
-import { createArea } from '../../actions/areas';
+import { updateArea } from '../../../actions/areas';
 import { connect } from 'react-redux';
 
-class NewAreaForm extends React.Component {
+class UpdateAreaForm extends React.Component {
+    state = { area: {} };
+
+    componentDidMount() {
+        const { dispatch } = this.props;
+        const { id } = this.props.match.params;
+        axios.get(`/api/areas/${id}`)
+        .then( res => {
+          this.setState({ area: res.data.area});
+          dispatch(setHeaders(res.headers));
+        })
+        .catch( err => {
+          dispatch(setFlash('Failed to get area', 'red'));
+        })
+      }
 
     renderField = (field) => {
         return (
@@ -12,7 +26,7 @@ class NewAreaForm extends React.Component {
                 <label>{field.label}</label>
                 <Form.Input
                     type='text' 
-                    {...field.input}
+                    {field.meta.pristine ? this.state.area[`${field.label}`] : ...field.input }
                 />
                 <div className="form-error"> { field.meta.touched ? field.meta.error : '' } </div>
             </Container>
@@ -21,7 +35,7 @@ class NewAreaForm extends React.Component {
 
     onSubmit = (values) => {
         const { dispatch, history } = this.props;
-        dispatch(createArea(values, () => history.push('/guide') ));
+        dispatch(updateArea(values, () => history.push('/guide') ));
     }
 
     render() {
@@ -29,7 +43,7 @@ class NewAreaForm extends React.Component {
 
         return (
             <Container>
-                <Header as='h1' textAlign='center'>New Area Form</Header>
+                <Header as='h1' textAlign='center'>Update Area Form</Header>
                 <Form onSubmit={ handleSubmit(this.onSubmit) }>
                     <Field
                         label='Name of Area'
@@ -64,5 +78,5 @@ const validate = (values) => {
 
 export default reduxForm({
     validate,
-    form: 'NewAreaForm'
-})(NewAreaForm);
+    form: 'UpdateAreaForm'
+})(connect()(UpdateAreaForm));

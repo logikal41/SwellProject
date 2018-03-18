@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Form, Header, Container } from 'semantic-ui-react';
-import { createRoute } from '../../actions/routes';
+import { createRoute } from '../../../actions/routes';
 import { connect } from 'react-redux';
 
 class NewRouteForm extends React.Component {
@@ -84,6 +84,9 @@ const validate = (values) => {
 
     if (!values.name) {
         errors.name = "Enter a route name";
+    }
+    if (!values.difficulty) {
+        errors.difficulty = "Enter the difficulty";
     }
     if (!values.description) {
         errors.description = "Enter a route description";

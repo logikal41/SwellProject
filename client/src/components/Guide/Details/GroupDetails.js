@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { setHeaders } from '../../actions/headers';
-import { setFlash } from '../../actions/flash';
+import { setHeaders } from '../../../actions/headers';
+import { setFlash } from '../../../actions/flash';
 import { connect } from 'react-redux';
 import { Container, Header } from 'semantic-ui-react';
 

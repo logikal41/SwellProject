@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { setHeaders } from './headers';
 import { setFlash } from './flash';
-import { selectWall } from './walls';
 
 export const SELECT_ROUTE = 'SELECT_ROUTE';
 export const GET_ROUTES = 'GET_ROUTES';
@@ -25,7 +24,6 @@ export const getRoutes = (wall_id) => {
     axios.get(`/api/walls/${wall_id}`)
       .then( res => {
         dispatch({ type: GET_ROUTES, payload: res.data.routes });
-        dispatch(selectWall(res.data.wall));
         dispatch(setHeaders(res.headers));
       })
       .catch( err => {

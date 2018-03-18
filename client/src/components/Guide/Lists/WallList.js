@@ -3,10 +3,9 @@ import { List, Header, Container, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom'; // desconstruct withRouter here when doing updates and deletes
 import axios from 'axios';
-import { setHeaders } from '../../actions/headers';
-import { setFlash } from '../../actions/flash';
-import { selectArea } from '../../actions/areas';
-import Map from './Map';
+import { setHeaders } from '../../../actions/headers';
+import { setFlash } from '../../../actions/flash';
+import Map from '../Map';
 
 class WallList extends Component {
   state={ walls: [] };
@@ -17,7 +16,6 @@ class WallList extends Component {
     axios.get(`/api/areas/${id}`)
     .then( res => {
       this.setState({ walls: res.data.walls});
-      dispatch(selectArea(res.data.area));
       dispatch(setHeaders(res.headers));
     })
     .catch( err => {

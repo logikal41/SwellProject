@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { List, Header, Container, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'; 
-import { selectRoute, getRoutes } from '../../actions/routes';
+import { selectRoute, getRoutes } from '../../../actions/routes';
 
 
 class RouteList extends Component {

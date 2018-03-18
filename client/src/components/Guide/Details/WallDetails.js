@@ -2,12 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Container, Header } from 'semantic-ui-react';
-import { setHeaders } from '../../actions/headers';
-import { setFlash } from '../../actions/flash';
-import { selectWall } from '../../actions/walls';
-import { clearRoutes } from '../../actions/routes';
-import { selectArea } from '../../actions/areas';
+import { Container, Header, Button } from 'semantic-ui-react';
+import { setHeaders } from '../../../actions/headers';
+import { setFlash } from '../../../actions/flash';
+import { selectWall, deleteWall } from '../../../actions/walls';
+import { clearRoutes } from '../../../actions/routes';
+import { selectArea } from '../../../actions/areas';
 
 class WallDetails extends React.Component {
     state={ wall: {}, area_name: '' };
@@ -35,32 +35,21 @@ class WallDetails extends React.Component {
         })
       }
 
-      clearWall = () => {
-          const { dispatch } = this.props;
-          dispatch(selectWall(null));
-          dispatch(clearRoutes());
-      }
-
-      clearAll = () => {
-        const { dispatch } = this.props;
-        dispatch(selectArea(null));
-        dispatch(selectWall(null));
-        dispatch(clearRoutes());
-      }
-
       renderNavLinks = () => {
           const { area_id } = this.state.wall;
+          const { dispatch } = this.props;
 
           return (
             <Container>
-                <Link to='/guide' onClick={() => this.clearAll()}>San Rafael Swell - North > </Link>
-                <Link to={`/area/${area_id}`} onClick={() => this.clearWall()}>
+                <Link to='/guide' onClick={() => dispatch(clearRoutes())}>San Rafael Swell - North > </Link>
+                <Link to={`/area/${area_id}`} onClick={() => dispatch(clearRoutes())}>
                     {this.state.area_name} </Link>
             </Container>
           )
       }
 
       render() {
+        const { dispatch, history } = this.props;
         const { wall } = this.state;
 
         if ( !wall ) {
@@ -70,8 +59,11 @@ class WallDetails extends React.Component {
         return (
             <Container>
                 {this.renderNavLinks()}
-                <Header as='h3'>Wall Name: {wall.name} </Header>
-                <Header as='h3'>Wall Description: {wall.description} </Header>
+                <Container>
+                    <Button onClick={() => dispatch(deleteWall(wall.id, () => history.push(`/area/${wall.area_id}`)))}> Delete </Button>
+                    <Header as='h3'>Wall Name: {wall.name} </Header>
+                    <Header as='h3'>Wall Description: {wall.description} </Header>
+                </Container>
             </Container>
         )
     }

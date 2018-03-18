@@ -1,10 +1,10 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Form, Header, Container } from 'semantic-ui-react';
-import { createWall } from '../../actions/walls';
+import { Form, Header, Container, Button } from 'semantic-ui-react';
+import { createArea } from '../../../actions/areas';
 import { connect } from 'react-redux';
 
-class NewWallForm extends React.Component {
+class NewAreaForm extends React.Component {
 
     renderField = (field) => {
         return (
@@ -20,29 +20,29 @@ class NewWallForm extends React.Component {
     }
 
     onSubmit = (values) => {
-        const { dispatch, history, selectedArea } = this.props;
-        const { id } = this.props.selectedArea;
-        dispatch(createWall( { id, ...values}, () => history.push(`/area/${id}`) ));
+        const { dispatch, history } = this.props;
+        dispatch(createArea(values, () => history.push('/guide') ));
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, history } = this.props;
 
         return (
             <Container>
-                <Header as='h1' textAlign='center'>New Wall Form</Header>
+                <Header as='h1' textAlign='center'>New Area Form</Header>
                 <Form onSubmit={ handleSubmit(this.onSubmit) }>
                     <Field
-                        label='Name of Wall'
+                        label='Name of Area'
                         name='name'
                         component={this.renderField}
                     />
                     <Field
-                        label='Wall Description'
+                        label='Area Description'
                         name='description'
                         component={this.renderField}
                     />
                     <Form.Button positive>Submit</Form.Button>
+                    <Button negative onClick={() => history.push('/guide')}>Cancel</Button>
                 </Form>
             </Container>
         )
@@ -53,20 +53,16 @@ const validate = (values) => {
     const errors = {};
 
     if (!values.name) {
-        errors.name = "Enter a wall name";
+        errors.name = "Enter an area name";
     }
     if (!values.description) {
-        errors.description = "Enter a wall description";
+        errors.description = "Enter an area description";
     }
 
     return errors;
 }
 
-const mapStateToProps = ({ selectedArea }) => {
-    return { selectedArea }
-};
-
 export default reduxForm({
     validate,
-    form: 'NewWallForm'
-})(connect(mapStateToProps)(NewWallForm));
+    form: 'NewAreaForm'
+})(connect()(NewAreaForm));

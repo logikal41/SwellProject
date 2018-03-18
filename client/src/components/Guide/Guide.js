@@ -1,15 +1,14 @@
 import React from 'react';
 import { Container, Grid } from 'semantic-ui-react';
-import AreaList from './AreaList';
-import WallList from './WallList';
-import RouteList from './RouteList';
+import AreaList from './Lists/AreaList';
+import WallList from './Lists/WallList';
+import RouteList from './Lists/RouteList';
 import DetailWindow from './DetailWindow';
 
 class Guide extends React.Component {
 
     renderList = () => {
-        const { path, params } = this.props.match;
-        switch(path){
+        switch(this.props.match.path){
             case '/guide': {
                 return <AreaList />
             }
