@@ -1,43 +1,42 @@
 import React from 'react';
+import axios from 'axios';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Container } from 'semantic-ui-react';
-import SpecificDetails from './SpecificDetails';
+import { Container, Header } from 'semantic-ui-react';
+import { setHeaders } from '../../actions/headers';
+import { setFlash } from '../../actions/flash';
 
 class AreaDetails extends React.Component {
+    state={ area: {} };
 
-    renderDetails = () => {
-        const { infoType, selectedGroup, selectedArea, selectedWall } = this.props;
-        switch(infoType){
-            case '/guide': {
-                return <SpecificDetails type='Group' dataList={selectedGroup} />
-            }
-            case '/area/:id': {
-                return <SpecificDetails type='Area' dataList={selectedArea} />
-            }
-            case '/wall/:id': {
-                return <SpecificDetails type='Wall' dataList={selectedWall} />
-            }
-            default: {
-                return <div>Select a group!!!</div>
-            }
+    componentDidMount() {
+        const { dispatch } = this.props;
+        const { id } = this.props.match.params;
+        axios.get(`/api/areas/${id}`)
+        .then( res => {
+          this.setState({ area: res.data.area});
+          dispatch(setHeaders(res.headers));
+        })
+        .catch( err => {
+          dispatch(setFlash('Failed to get area', 'red'));
+        })
+      }
+
+      render() {
+        const { area } = this.state;
+
+        if ( !area ) {
+            return <div> Loading... </div>
         }
-    }
 
-    render() {
         return (
             <Container>
-                {this.renderDetails()}
+                <Link to='/guide'>San Rafael Swell - North</Link>
+                <Header as='h3'>Area Name: {area.name} </Header>
+                <Header as='h3'>Area Description: {area.description} </Header>
             </Container>
         )
     }
 }
 
-const mapStateToProps = (state) => {
-    return { 
-        selectedGroup: state.selectedGroup,
-        selectedArea: state.selectedArea,
-        selectedWall: state.selectedWall,
-    }
-}
-
-export default connect(mapStateToProps)(AreaDetails);
+export default withRouter(connect()(AreaDetails));

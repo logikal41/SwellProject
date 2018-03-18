@@ -33,7 +33,7 @@ class RouteDetails extends React.Component {
         const { dispatch } = this.props;
         return (
             <Container>
-                <Link to='/' onClick={() => this.clearAll()}>{this.props.selectedGroup.name} > </Link>
+                <Link to='/' onClick={() => this.clearAll()}>San Rafael Swell - North > </Link>
                 <Link to={`/area/${this.props.selectedArea.id}`} onClick={() => this.clearBoth()}>
                     {this.props.selectedArea.name} > </Link>
                 <Link to={`/wall/${this.props.selectedWall.id}`} onClick={() => dispatch(selectRoute(null))} >
@@ -48,7 +48,7 @@ class RouteDetails extends React.Component {
 
         return (
             <Container>
-                {this.renderNavLinks()}
+                {/* {this.renderNavLinks()} */}
                 <Button onClick={() => this.resetRoutes() }>Delete</Button>
                 <Header as='h1' textAlign='center'>Route Details</Header>
                 <List>

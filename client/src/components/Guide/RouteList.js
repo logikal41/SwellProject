@@ -8,8 +8,9 @@ import { selectRoute, getRoutes } from '../../actions/routes';
 class RouteList extends Component {
 
   componentDidMount() {
-    const { dispatch, wall_id } = this.props;
-    dispatch(getRoutes(wall_id));
+    const { dispatch } = this.props;
+    const { id } = this.props.match.params;
+    dispatch(getRoutes(id));
   }
 
   renderCreate = () => {

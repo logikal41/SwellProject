@@ -30,15 +30,16 @@ class specificDetails extends React.Component {
 
     renderNavLinks = (type) => {
         const { dispatch, dataList, history } = this.props;
+        const { path } = this.props.match;
 
-        switch(type){
-            case 'Area': {
+        switch(path){
+            case '/guide': {
                 return (
                     <Container>
                         <List>
                             <List.Item>
                                 <Link to='/guide' onClick={() => dispatch(this.clearArea())}>
-                                    {this.props.selectedGroup.name}</Link>
+                                San Rafael Swell - North > </Link>                                       {/* hard coded the name in */}
                             </List.Item>
                             <List.Item>
                                 {/* line break */}
@@ -50,13 +51,13 @@ class specificDetails extends React.Component {
                     </Container>
                 )
             }
-            case 'Wall': {
+            case '/area/:id': {
                 return (
                     <Container>
                         <List>
                             <List.Item>
                                 <Link to='/guide' onClick={() => this.clearBoth()}>
-                                    {this.props.selectedGroup.name} > </Link>
+                                    San Rafael Swell - North > </Link>
                                 <Link to={`/area/${this.props.selectedArea.id}`} onClick={() => dispatch(this.clearWall())}>
                                     {this.props.selectedArea.name}</Link>
                             </List.Item>

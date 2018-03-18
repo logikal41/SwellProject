@@ -5,7 +5,6 @@ import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { setHeaders } from '../../actions/headers';
 import { setFlash } from '../../actions/flash';
-import { selectGroup } from '../../actions/groups';
 import Map from './Map';
 
 class AreaList extends Component {
@@ -16,7 +15,6 @@ class AreaList extends Component {
     axios.get('/api/groups/1') // group 1 is hardcoded since we are only doing this for the san rafael swell at this time
     .then( res => {
       this.setState({ areas: res.data.areas});
-      dispatch(selectGroup(res.data.group));
       dispatch(setHeaders(res.headers));
     })
     .catch( err => {

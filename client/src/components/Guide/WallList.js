@@ -12,8 +12,9 @@ class WallList extends Component {
   state={ walls: [] };
 
   componentDidMount() {
-    const { dispatch, area_id } = this.props;
-    axios.get(`/api/areas/${area_id}`)
+    const { dispatch } = this.props;
+    const { id } = this.props.match.params;
+    axios.get(`/api/areas/${id}`)
     .then( res => {
       this.setState({ walls: res.data.walls});
       dispatch(selectArea(res.data.area));
