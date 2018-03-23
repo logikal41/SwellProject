@@ -41,7 +41,7 @@ class AreaList extends Component {
           <List>
             { areas.map( area => {
               return (
-                <List.Item key={area.id}>
+                <List.Item className='guide-list' key={area.id}>
                   <Link to={`/area/${area.id}`}> {area.name} </Link>
                 </List.Item>
               )
