@@ -1,32 +1,35 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Form, Header, Container, Button } from 'semantic-ui-react';
-import { updateArea } from '../../../actions/areas';
+import { updateArea, getArea } from '../../../actions/areas';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import { setHeaders } from '../../../actions/headers';
+import { setFlash } from '../../../actions/flash';
 
 class UpdateAreaForm extends React.Component {
-    state = { area: {} };
 
     componentDidMount() {
-        const { dispatch } = this.props;
+        const { dispatch, initialize } = this.props;
         const { id } = this.props.match.params;
+
         axios.get(`/api/areas/${id}`)
         .then( res => {
-          this.setState({ area: res.data.area});
-          dispatch(setHeaders(res.headers));
+            initialize(res.data.area);
+            dispatch(setHeaders(res.headers));
         })
         .catch( err => {
-          dispatch(setFlash('Failed to get area', 'red'));
+            dispatch(setFlash('Failed to get area', 'red'));
         })
-      }
+    }
 
     renderField = (field) => {
         return (
             <Container>
                 <label>{field.label}</label>
                 <Form.Input
-                    type='text' 
-                    {field.meta.pristine ? this.state.area[`${field.label}`] : ...field.input }
+                    type='text'
+                    {...field.input} 
                 />
                 <div className="form-error"> { field.meta.touched ? field.meta.error : '' } </div>
             </Container>
@@ -76,7 +79,11 @@ const validate = (values) => {
     return errors;
 }
 
+const mapStateToProps = ({ initialValues }) => {
+    return { initialValues }
+}
+
 export default reduxForm({
     validate,
     form: 'UpdateAreaForm'
-})(connect()(UpdateAreaForm));
+})(connect(mapStateToProps)(UpdateAreaForm));

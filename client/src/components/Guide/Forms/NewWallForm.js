@@ -11,7 +11,8 @@ class NewWallForm extends React.Component {
             <Container>
                 <label>{field.label}</label>
                 <Form.Input
-                    type='text' 
+                    type='text'
+                    placeholder={field.placeholder} 
                     {...field.input}
                 />
                 <div className="form-error"> { field.meta.touched ? field.meta.error : '' } </div>
@@ -36,11 +37,13 @@ class NewWallForm extends React.Component {
                         label='Name of Wall'
                         name='name'
                         component={this.renderField}
+                        placeholder='name'
                     />
                     <Field
                         label='Wall Description'
                         name='description'
                         component={this.renderField}
+                        placeholder='description'
                     />
                     <Form.Button positive>Submit</Form.Button>
                 </Form>

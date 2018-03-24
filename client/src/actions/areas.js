@@ -17,6 +17,20 @@ export const deleteArea = (id, callBack) => {
   } 
 }
 
+export const getArea = id => {
+  return dispatch => {
+    axios.get(`/api/areas/${id}`)
+    .then( res => {
+      dispatch({ type: 'GET_VALUES' , payload: res.data.area })
+      dispatch(setHeaders(res.headers));
+    })
+    .catch( err => {
+      dispatch(setFlash('Failed to get area', 'red'));
+    })
+  }
+}
+
+
 export const updateArea = ({id, name, description}) => {
   return dispatch => {
   axios.put(`api/areas/${id}`, { name, description })

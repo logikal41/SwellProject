@@ -11,7 +11,8 @@ class NewAreaForm extends React.Component {
             <Container>
                 <label>{field.label}</label>
                 <Form.Input
-                    type='text' 
+                    type='text'
+                    placeholder={field.placeholder} 
                     {...field.input}
                 />
                 <div className="form-error"> { field.meta.touched ? field.meta.error : '' } </div>
@@ -35,11 +36,13 @@ class NewAreaForm extends React.Component {
                         label='Name of Area'
                         name='name'
                         component={this.renderField}
+                        placeholder='name'
                     />
                     <Field
                         label='Area Description'
                         name='description'
                         component={this.renderField}
+                        placeholder='description'
                     />
                     <Form.Button positive>Submit</Form.Button>
                     <Button negative onClick={() => history.push('/guide')}>Cancel</Button>
