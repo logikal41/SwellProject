@@ -28,3 +28,16 @@ export const deleteWall = (id, callBack) => {
     })  
   } 
 }
+
+export const updateWall = ({id, name, description}, callBack) => {
+  return dispatch => {
+  axios.put(`../../api/walls/${id}`, { name, description })
+    .then( res => {
+      dispatch(setHeaders(res.headers));
+      callBack();
+    })
+    .catch( err => {
+      dispatch(setFlash('Failed to update area', 'red'));
+    })  
+  } 
+}

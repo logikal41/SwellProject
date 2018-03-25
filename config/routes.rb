@@ -18,10 +18,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :groups, only: :show
-    resources :areas, only: [:show, :create, :destroy]
+    resources :areas, only: [:show, :create, :destroy, :update]
     get 'areaname/:id', to:'areas#areaname'
 
-    resources :walls, only: [:show, :create, :destroy]
+    resources :walls, only: [:show, :create, :destroy, :update]
     resources :routes, only: [:show, :create, :destroy]
     resources :users, only: [:index]
 

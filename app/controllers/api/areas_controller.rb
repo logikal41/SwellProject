@@ -6,7 +6,7 @@ class Api::AreasController < ApplicationController
   
     def show
       area = Area.find(params[:id])
-      walls = area.walls
+      walls = area.walls.order(id: :asc)
       render json: { area: area, walls: walls }
     end
 

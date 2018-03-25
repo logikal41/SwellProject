@@ -36,7 +36,7 @@ class AreaDetails extends React.Component {
                 <Link to='/guide'>San Rafael Swell - North</Link>
                 <Container>
                     <Button onClick={() => dispatch(deleteArea(area.id, () => history.push('/guide')))}>Delete</Button>
-                    <Link to={`/area/update/${area.id}`}>Update</Link>
+                    <Button onClick={() => history.push(`/area/update/${area.id}`)}>Update</Button>
                     <Header as='h3'>Area Name: {area.name} </Header>
                     <Header as='h3'>Area Description: {area.description} </Header>
                 </Container>

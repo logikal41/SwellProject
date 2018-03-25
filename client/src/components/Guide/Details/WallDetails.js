@@ -5,9 +5,8 @@ import { connect } from 'react-redux';
 import { Container, Header, Button } from 'semantic-ui-react';
 import { setHeaders } from '../../../actions/headers';
 import { setFlash } from '../../../actions/flash';
-import { selectWall, deleteWall } from '../../../actions/walls';
+import { deleteWall } from '../../../actions/walls';
 import { clearRoutes } from '../../../actions/routes';
-import { selectArea } from '../../../actions/areas';
 
 class WallDetails extends React.Component {
     state={ wall: {}, area_name: '' };
@@ -61,6 +60,7 @@ class WallDetails extends React.Component {
                 {this.renderNavLinks()}
                 <Container>
                     <Button onClick={() => dispatch(deleteWall(wall.id, () => history.push(`/area/${wall.area_id}`)))}> Delete </Button>
+                    <Button onClick={() => history.push(`/wall/update/${wall.id}`)}>Update</Button>
                     <Header as='h3'>Wall Name: {wall.name} </Header>
                     <Header as='h3'>Wall Description: {wall.description} </Header>
                 </Container>

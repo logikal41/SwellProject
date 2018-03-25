@@ -6,7 +6,7 @@ class Api::GroupsController < ApplicationController
     
       def show
         group = Group.find(params[:id])
-        areas = group.areas;
+        areas = group.areas.order(id: :asc);
         render json: { group: group, areas: areas }
       end
     
