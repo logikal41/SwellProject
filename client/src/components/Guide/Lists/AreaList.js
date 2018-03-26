@@ -8,29 +8,15 @@ import { setFlash } from '../../../actions/flash';
 import Map from '../Map';
 
 class AreaList extends Component {
-  state={ areas: [] };
-
-  componentDidMount() {
-    const { dispatch } = this.props;
-    axios.get('/api/groups/1') // group 1 is hardcoded since we are only doing this for the san rafael swell at this time
-    .then( res => {
-      this.setState({ areas: res.data.areas});
-      dispatch(setHeaders(res.headers));
-    })
-    .catch( err => {
-      dispatch(setFlash('Failed to get areas', 'red'));
-    })
-  }
 
   renderCreate = () => {
     this.props.history.push('/area/new');
   }
 
-
   render() {
-    const { areas } = this.state;
+    const { activeList } = this.props;
 
-    if ( areas.length === 0) {
+    if ( activeList.length === 0) {
       return <Header as='h1' textAlign='center'>Loading...</Header>
     } else {
       return (
@@ -39,7 +25,7 @@ class AreaList extends Component {
           <Button onClick={() => this.renderCreate()}>New Area</Button>
           <Header as='h1' textAlign='center'>Area List</Header>
           <List>
-            { areas.map( area => {
+            { activeList.map( area => {
               return (
                 <List.Item key={area.id}>
                   <Link to={`/area/${area.id}`}> {area.name} </Link>
@@ -53,4 +39,8 @@ class AreaList extends Component {
   }
 }
 
-export default withRouter(connect()(AreaList));
+const mapStateToProps = ( { activeList }) => { 
+  return { activeList }
+}
+
+export default withRouter(connect(mapStateToProps)(AreaList));

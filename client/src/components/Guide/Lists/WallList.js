@@ -8,30 +8,16 @@ import { setFlash } from '../../../actions/flash';
 import Map from '../Map';
 
 class WallList extends Component {
-  state={ walls: [] };
-
-  componentDidMount() {
-    const { dispatch } = this.props;
-    const { id } = this.props.match.params;
-    axios.get(`/api/areas/${id}`)
-    .then( res => {
-      this.setState({ walls: res.data.walls});
-      dispatch(setHeaders(res.headers));
-    })
-    .catch( err => {
-      dispatch(setFlash('Failed to get walls', 'red'));
-    })
-  }
-
+    
   renderCreate = () => {
     this.props.history.push('/wall/new');
   }
 
 
   render() {
-    const { walls } = this.state;
+    const { activeList } = this.props;
 
-    if ( walls.length === 0) {
+    if ( activeList.length === 0) {
       return <Header as='h1' textAlign='center'>Loading...</Header>
     } else {
       return (
@@ -40,7 +26,7 @@ class WallList extends Component {
           <Button onClick={() => this.renderCreate()}>New Wall</Button>
           <Header as='h1' textAlign='center'>Wall List</Header>
           <List>
-            { walls.map( wall => {
+            { activeList.map( wall => {
               return (
                 <List.Item key={wall.id}>
                   <Link to={`/wall/${wall.id}`}> {wall.name} </Link>
@@ -54,4 +40,8 @@ class WallList extends Component {
   }
 }
 
-export default withRouter(connect()(WallList));
+const mapStateToProps = ({ activeList }) => {
+  return { activeList }
+}
+
+export default withRouter(connect(mapStateToProps)(WallList));

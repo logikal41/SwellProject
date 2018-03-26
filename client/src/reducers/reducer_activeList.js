@@ -1,13 +1,13 @@
-import { GET_ROUTES, DELETE_ROUTE, CLEAR_ROUTES } from '../actions/routes';
+import { GET_ACTIVE_LIST } from '../actions/groups';
 
-const routes = (state = [], action) => {
+const activeList = (state = [], action) => {
     switch (action.type) {
-      case GET_ROUTES:
+      case GET_ACTIVE_LIST:
         return action.payload;
-      case DELETE_ROUTE:
-        return state.filter( route => route.id !== action.payload );
-      case CLEAR_ROUTES:
-        return [];
+    //   case DELETE_ROUTE:
+    //     return state.filter( route => route.id !== action.payload );
+    //   case CLEAR_ROUTES:
+    //     return [];
     //   case CREATE_ROUTE:
     //     return [action.payload, ...state];
     //   case UPDATE_ROUTE:
@@ -18,5 +18,5 @@ const routes = (state = [], action) => {
     }
   };
 
-  export default routes;
+  export default activeList;
   

@@ -6,37 +6,26 @@ import { connect } from 'react-redux';
 import { Container, Header } from 'semantic-ui-react';
 
 class GroupDetails extends Component {
-    state={ group: {} };
-
-    componentDidMount() {
-        const { dispatch } = this.props;
-
-        axios.get('/api/groups/1') // group 1 is hardcoded since we are only doing this for the san rafael swell at this time
-        .then( res => {
-          this.setState({ group: res.data.group});
-          dispatch(setHeaders(res.headers));
-        })
-        .catch( err => {
-          dispatch(setFlash('Failed to get group', 'red'));
-        })
-    }
-
 
     render() {
-        const { group } = this.state;
+        const { activeSelection } = this.props;
 
-        if ( !group ) {
+        if ( !activeSelection ) {
             return <div> Loading... </div>
         }
 
         return (
             <Container>
-                <Header as='h3'>Group Name: {group.name} </Header>
-                <Header as='h3'>Group Description: {group.description} </Header>
+                <Header as='h3'>Group Name: {activeSelection.name} </Header>
+                <Header as='h3'>Group Description: {activeSelection.description} </Header>
             </Container>
         )
     }
 }
+
+const mapStateToProps = ({ activeSelection }) => {
+    return { activeSelection }
+}
     
 
-export default connect()(GroupDetails);
+export default connect(mapStateToProps)(GroupDetails);

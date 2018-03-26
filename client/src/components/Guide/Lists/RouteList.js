@@ -3,32 +3,28 @@ import { List, Header, Container, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'; 
 import { selectRoute, getRoutes } from '../../../actions/routes';
+import Map from '../Map';
 
 
 class RouteList extends Component {
-
-  componentDidMount() {
-    const { dispatch } = this.props;
-    const { id } = this.props.match.params;
-    dispatch(getRoutes(id));
-  }
 
   renderCreate = () => {
     this.props.history.push('/route/new');
   }
 
   render() {
-    const { routes } = this.props;
+    const { activeList } = this.props;
 
-    if ( routes.length === 0) {
+    if ( activeList.length === 0) {
       return <Header as='h1' textAlign='center'>Loading...</Header>
     } else {
       return (
         <Container>
+          <Map />
          <Button onClick={() => this.renderCreate()}>New Route</Button>
           <Header as='h1' textAlign='center'>Route List</Header>
           <List>
-            { routes.map( route => {
+            { activeList.map( route => {
               return (
                 <List.Item 
                   key={route.id} 
@@ -45,8 +41,8 @@ class RouteList extends Component {
   }
 }
 
-const mapStateToProps = ({ routes }) => {
-  return { routes };
+const mapStateToProps = ({ activeList }) => {
+  return { activeList };
 }
 
 export default withRouter(connect(mapStateToProps)(RouteList));

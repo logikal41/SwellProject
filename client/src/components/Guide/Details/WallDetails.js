@@ -9,49 +9,37 @@ import { deleteWall } from '../../../actions/walls';
 import { clearRoutes } from '../../../actions/routes';
 
 class WallDetails extends React.Component {
-    state={ wall: {}, area_name: '' };
+    state={ area_name: '' };
 
-    componentDidMount() {
-        const { dispatch } = this.props;
-        const { id } = this.props.match.params;
+    // componentDidMount() {
+    //     const { dispatch, activeSelection } = this.props;
        
-        axios.get(`/api/walls/${id}`)
-        .then( res => {
-          this.setState({ wall: res.data.wall});
-          
-            axios.get(`/api/areaname/${res.data.wall.area_id}`)
-            .then ( res => {
-                this.setState({ area_name: res.data });
-            })
-            .catch( err => { 
-                dispatch(setFlash('Failed to get area name', 'red'));
-            })
-
-          dispatch(setHeaders(res.headers));
-        })
-        .catch( err => {
-          dispatch(setFlash('Failed to get wall', 'red'));
-        })
-      }
+    //     axios.get(`/api/areaname/${activeSelection.area_id}`)
+    //     .then ( res => {
+    //         this.setState({ area_name: res.data });
+    //         dispatch(setHeaders(res.headers));
+    //     })
+    //     .catch( err => { 
+    //         dispatch(setFlash('Failed to get area name', 'red'));
+    //     })  
+    // }
 
       renderNavLinks = () => {
-          const { area_id } = this.state.wall;
-          const { dispatch } = this.props;
+          const { dispatch, activeSelection: {area_id} } = this.props;
 
           return (
             <Container>
                 <Link to='/guide' onClick={() => dispatch(clearRoutes())}>San Rafael Swell - North > </Link>
-                <Link to={`/area/${area_id}`} onClick={() => dispatch(clearRoutes())}>
-                    {this.state.area_name} </Link>
+                {/* <Link to={`/area/${area_id}`} onClick={() => dispatch(clearRoutes())}>
+                    {this.state.area_name} </Link> */}
             </Container>
           )
       }
 
       render() {
-        const { dispatch, history } = this.props;
-        const { wall } = this.state;
+        const { dispatch, history, activeSelection } = this.props;
 
-        if ( !wall ) {
+        if ( !activeSelection ) {
             return <div> Loading... </div>
         }
 
@@ -59,14 +47,18 @@ class WallDetails extends React.Component {
             <Container>
                 {this.renderNavLinks()}
                 <Container>
-                    <Button onClick={() => dispatch(deleteWall(wall.id, () => history.push(`/area/${wall.area_id}`)))}> Delete </Button>
-                    <Button onClick={() => history.push(`/wall/update/${wall.id}`)}>Update</Button>
-                    <Header as='h3'>Wall Name: {wall.name} </Header>
-                    <Header as='h3'>Wall Description: {wall.description} </Header>
+                    <Button onClick={() => dispatch(deleteWall(activeSelection.id, () => history.push(`/area/${activeSelection.area_id}`)))}> Delete </Button>
+                    <Button onClick={() => history.push(`/wall/update/${activeSelection.id}`)}>Update</Button>
+                    <Header as='h3'>Wall Name: {activeSelection.name} </Header>
+                    <Header as='h3'>Wall Description: {activeSelection.description} </Header>
                 </Container>
             </Container>
         )
     }
 }
 
-export default withRouter(connect()(WallDetails));
+const mapStateToProps = ({ activeSelection }) => {
+    return { activeSelection }
+}
+
+export default withRouter(connect(mapStateToProps)(WallDetails));

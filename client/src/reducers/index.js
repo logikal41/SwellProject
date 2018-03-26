@@ -4,15 +4,17 @@ import user from './reducer_user';
 import flash from './reducer_flash';
 import members from './reducer_members';
 import selectedRoute from './reducer_selectedRoute';
-import routes from './reducer_routes';
+import activeList from './reducer_activeList';
+import activeSelection from './reducer_activeSelection';
 
 const rootReducer = combineReducers({
   user,
   flash,
   selectedRoute,
   members,
-  routes,
   form: formReducer,
+  activeList,
+  activeSelection,
 });
 
 export default rootReducer;

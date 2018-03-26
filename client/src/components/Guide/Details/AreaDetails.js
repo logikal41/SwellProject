@@ -8,26 +8,11 @@ import { setFlash } from '../../../actions/flash';
 import { deleteArea } from '../../../actions/areas';
 
 class AreaDetails extends React.Component {
-    state={ area: {} };
-
-    componentDidMount() {
-        const { dispatch } = this.props;
-        const { id } = this.props.match.params;
-        axios.get(`/api/areas/${id}`)
-        .then( res => {
-          this.setState({ area: res.data.area});
-          dispatch(setHeaders(res.headers));
-        })
-        .catch( err => {
-          dispatch(setFlash('Failed to get area', 'red'));
-        })
-      }
 
       render() {
-        const { area } = this.state;
-        const { dispatch, history } = this.props;
+        const { dispatch, history, activeSelection } = this.props;
 
-        if ( !area ) {
+        if ( !activeSelection ) {
             return <div> Loading... </div>
         }
 
@@ -35,14 +20,18 @@ class AreaDetails extends React.Component {
             <Container>
                 <Link to='/guide'>San Rafael Swell - North</Link>
                 <Container>
-                    <Button onClick={() => dispatch(deleteArea(area.id, () => history.push('/guide')))}>Delete</Button>
-                    <Button onClick={() => history.push(`/area/update/${area.id}`)}>Update</Button>
-                    <Header as='h3'>Area Name: {area.name} </Header>
-                    <Header as='h3'>Area Description: {area.description} </Header>
+                    <Button onClick={() => dispatch(deleteArea(activeSelection.id, () => history.push('/guide')))}>Delete</Button>
+                    <Button onClick={() => history.push(`/area/update/${activeSelection.id}`)}>Update</Button>
+                    <Header as='h3'>Area Name: {activeSelection.name} </Header>
+                    <Header as='h3'>Area Description: {activeSelection.description} </Header>
                 </Container>
             </Container>
         )
     }
 }
 
-export default withRouter(connect()(AreaDetails));
+const mapStateToProps = ({ activeSelection }) => {
+    return { activeSelection }
+}
+
+export default withRouter(connect(mapStateToProps)(AreaDetails));
