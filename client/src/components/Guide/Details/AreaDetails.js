@@ -6,21 +6,25 @@ import { deleteArea } from '../../../actions/areas';
 
 class AreaDetails extends React.Component {
 
-      render() {
+    render() {
         const { dispatch, history, activeSelection } = this.props;
 
-        if ( !activeSelection ) {
+        if (!activeSelection) {
             return <div> Loading... </div>
         }
 
         return (
-            <Container>
-                <Link to='/guide'>San Rafael Swell - North</Link>
+            <Container className='comments-container'>
+                <Header className='details-header'> Area: {activeSelection.name}
+                    <Button floated='right' basic={true} onClick={() => dispatch(deleteArea(activeSelection.id, () => history.push('/guide')))}>Delete</Button>
+                    <Button floated='right' basic={true} onClick={`/area/update/${activeSelection.id}`}>Update</Button>
+                </Header>
+                <Container className='black-container'>
+                    <Link className='nav-text-color-selected' to='/guide'>San Rafael Swell - North</Link>
+                </Container>
                 <Container>
-                    <Button onClick={() => dispatch(deleteArea(activeSelection.id, () => history.push('/guide')))}>Delete</Button>
-                    <Button onClick={() => history.push(`/area/update/${activeSelection.id}`)}>Update</Button>
-                    <Header as='h3'>Area Name: {activeSelection.name} </Header>
-                    <Header as='h3'>Area Description: {activeSelection.description} </Header>
+                    <Header className='description-header'>DESCRIPTION </Header>
+                    <Header className='description-body'> {activeSelection.description} </Header>
                 </Container>
             </Container>
         )

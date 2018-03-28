@@ -12,9 +12,10 @@ class GroupDetails extends Component {
         }
 
         return (
-            <Container>
-                <Header as='h3'>Group Name: {activeSelection.name} </Header>
-                <Header as='h3'>Group Description: {activeSelection.description} </Header>
+            <Container className='comments-container'>
+                <Header className='details-header'> {activeSelection.name} </Header>
+                <Header className='description-header'>DESCRIPTION </Header>
+                <Header className='description-body'>{activeSelection.description} </Header>
             </Container>
         )
     }

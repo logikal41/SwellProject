@@ -18,10 +18,9 @@ class RouteList extends Component {
       return <Header as='h1' textAlign='center'>Loading...</Header>
     } else {
       return (
-        <Container>
-          <Map />
-         <Button onClick={() => this.renderCreate()}>New Route</Button>
-          <Header as='h1' textAlign='center'>Route List</Header>
+        <Container className='list-container'>
+         <Button className='list-button-creation-route' fluid={true} onClick={() => this.renderCreate()}>Add Route</Button>
+          <Header className='list-header' textAlign='left'>ROUTES</Header>
           <List>
             { activeList.map( route => {
               return (
