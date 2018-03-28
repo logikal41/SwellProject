@@ -27,7 +27,7 @@ class WallDetails extends React.Component {
           return (
             <Container>
                 <Link className='nav-text-color' to='/guide'>San Rafael Swell - North > </Link>
-                <Link className='nav-text-color-selected' to={`/area/${area_id}`}}>
+                <Link className='nav-text-color-selected' to={`/area/${area_id}`}>
                     {this.state.area_name} </Link>
             </Container>
           )
@@ -42,8 +42,8 @@ class WallDetails extends React.Component {
 
         return (
             <Container className='comments-container'>
-                <Header className='details-header'> Wall: {wall.name} 
-                    <Button basic={true} onClick={() => dispatch(deleteWall(wall.id, () => history.push(`/area/${wall.area_id}`)))}> Delete </Button>
+                <Header className='details-header'> Wall: {activeSelection.name} 
+                    <Button basic={true} onClick={() => dispatch(deleteWall(activeSelection.id, () => history.push(`/area/${activeSelection.area_id}`)))}> Delete </Button>
                     <Button basic={true} >Update</Button>
                 </Header>
                 

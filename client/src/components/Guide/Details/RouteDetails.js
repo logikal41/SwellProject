@@ -19,9 +19,8 @@ class RouteDetails extends React.Component {
             <Container>
                 <Link className='nav-text-color' to='/guide' onClick={() => this.clearRouteState()}>San Rafael Swell - North > </Link>
                 <Link className='nav-text-color' to={`/area/${activeSelection.area_id}`} onClick={() => this.clearRouteState()}>
-                    {area_name} > </Link>
-                <Link className='nav-text-color-selected'to={`/wall/${activeSelection.id}`}
-                    onClick={() => dispatch(selectRoute(null))}>
+                    AREA ID: {activeSelection.id} > </Link>
+                <Link className='nav-text-color-selected'to={`/wall/${activeSelection.id}`}>
                     {activeSelection.name} 
                 </Link>
             </Container>
