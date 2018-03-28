@@ -12,6 +12,7 @@ import UpdateAreaForm from './Guide/Forms/UpdateAreaForm';
 import NewWallForm from './Guide/Forms/NewWallForm';
 import UpdateWallForm from './Guide/Forms/UpdateWallForm';
 import NewRouteForm from './Guide/Forms/NewRouteForm';
+import UpdateRouteForm from './Guide/Forms/UpdateRouteForm';
 import MemberTab from './Members/MemberTab';
 import InviteConfirmation from './InviteConfirmation';
 import ProtectedRoute from './ProtectedRoute';
@@ -38,6 +39,7 @@ class App extends Component {
             <ProtectedRoute exact path='/wall/update/:id' component={UpdateWallForm} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/wall/:id' component={Guide} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/route/new' component={NewRouteForm} authLevel={["admin", "user"]} />
+            <ProtectedRoute exact path='/route/update/:id' component={UpdateRouteForm} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/members' component={MemberTab} authLevel={["admin"]} />
             <AuthRoute exact path='/login' component={Login} />
             <AuthRoute exact path='/register' component={Register} />

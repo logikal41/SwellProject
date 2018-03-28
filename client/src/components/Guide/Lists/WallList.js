@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { List, Header, Container, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom'; // desconstruct withRouter here when doing updates and deletes
-import axios from 'axios';
-import { setHeaders } from '../../../actions/headers';
-import { setFlash } from '../../../actions/flash';
 import Map from '../Map';
 
 class WallList extends Component {

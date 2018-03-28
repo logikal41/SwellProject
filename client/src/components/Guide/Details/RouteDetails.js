@@ -1,7 +1,4 @@
 import React from 'react';
-import axios from 'axios';
-import { setHeaders } from '../../../actions/headers';
-import { setFlash } from '../../../actions/flash';
 import { connect } from 'react-redux';
 import { List, Header, Container, Button } from 'semantic-ui-react';
 import { selectRoute, deleteRoute } from '../../../actions/routes';
@@ -32,12 +29,13 @@ class RouteDetails extends React.Component {
 
     render() {
         
-        const { activeSelection } = this.props;
+        const { activeSelection, history } = this.props;
 
         return (
             <Container>
                 {this.renderNavLinks()}
                 <Button onClick={() => this.resetRoutes() }>Delete</Button>
+                <Button onClick={() => history.push(`/route/update/${activeSelection.id}`)}>Update</Button>
                 <Header as='h1' textAlign='center'>Route Details</Header>
                 <List>
                     <List.Item>Route Name: {activeSelection.name}</List.Item>

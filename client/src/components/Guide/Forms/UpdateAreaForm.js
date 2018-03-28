@@ -15,8 +15,7 @@ class UpdateAreaForm extends React.Component {
 
         axios.get(`/api/areas/${id}`)
         .then( res => {
-            const { id, name, description } = res.data.area;
-            initialize({ id, name, description });
+            initialize(res.data.area);
             dispatch(setHeaders(res.headers));
         })
         .catch( err => {
@@ -45,6 +44,7 @@ class UpdateAreaForm extends React.Component {
 
     render() {
         const { handleSubmit, history } = this.props;
+        const { id } = this.props.match.params;
 
         return (
             <Container>
@@ -61,7 +61,7 @@ class UpdateAreaForm extends React.Component {
                         component={this.renderField}
                     />
                     <Form.Button positive>Submit</Form.Button>
-                    <Button negative onClick={() => history.push('/guide')}>Cancel</Button>
+                    <Button negative onClick={() => history.push(`/area/${id}`)}>Cancel</Button>
                 </Form>
             </Container>
         )

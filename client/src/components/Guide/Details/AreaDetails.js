@@ -1,10 +1,7 @@
 import React from 'react';
-import axios from 'axios';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Container, Header, Button } from 'semantic-ui-react';
-import { setHeaders } from '../../../actions/headers';
-import { setFlash } from '../../../actions/flash';
 import { deleteArea } from '../../../actions/areas';
 
 class AreaDetails extends React.Component {

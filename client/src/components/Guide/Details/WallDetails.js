@@ -1,10 +1,7 @@
 import React from 'react';
-import axios from 'axios';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Container, Header, Button } from 'semantic-ui-react';
-import { setHeaders } from '../../../actions/headers';
-import { setFlash } from '../../../actions/flash';
 import { deleteWall } from '../../../actions/walls';
 
 class WallDetails extends React.Component {
@@ -25,7 +22,7 @@ class WallDetails extends React.Component {
     // }
 
       renderNavLinks = () => {
-          const { dispatch, activeSelection: {area_id} } = this.props;
+          const { activeSelection: {area_id} } = this.props;
 
           return (
             <Container>
