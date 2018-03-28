@@ -6,6 +6,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { setHeaders } from '../../../actions/headers';
 import { setFlash } from '../../../actions/flash';
 import Map from '../Map';
+import { getArea } from '../../../actions/areas';
 
 class AreaList extends Component {
 
@@ -14,7 +15,7 @@ class AreaList extends Component {
   }
 
   render() {
-    const { activeList } = this.props;
+    const { dispatch, activeList, history } = this.props;
 
     if ( activeList.length === 0) {
       return <Header as='h1' textAlign='center'>Loading...</Header>
@@ -27,8 +28,10 @@ class AreaList extends Component {
           <List>
             { activeList.map( area => {
               return (
-                <List.Item key={area.id}>
-                  <Link to={`/area/${area.id}`}> {area.name} </Link>
+                <List.Item key={area.id} > 
+                  <Link to={`/area/${area.id}`}>
+                    {area.name}
+                  </Link>
                 </List.Item>
               )
             })}
@@ -38,6 +41,8 @@ class AreaList extends Component {
     }
   }
 }
+
+// onClick={() => dispatch(getArea(area.id, () => history.push(`/area/${area.id}`)))}
 
 const mapStateToProps = ( { activeList }) => { 
   return { activeList }

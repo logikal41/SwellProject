@@ -8,7 +8,6 @@ import { setHeaders } from '../../../actions/headers';
 import { setFlash } from '../../../actions/flash';
 
 class UpdateWallForm extends React.Component {
-    state = { wall: {} }; 
 
     componentDidMount() {
         const { dispatch, initialize } = this.props;
@@ -16,7 +15,6 @@ class UpdateWallForm extends React.Component {
 
         axios.get(`/api/walls/${id}`)
         .then( res => {
-            this.setState({ wall: res.data.wall });
             initialize(res.data.wall);
             dispatch(setHeaders(res.headers));
         })
@@ -40,13 +38,13 @@ class UpdateWallForm extends React.Component {
 
     onSubmit = (values) => {
         const { dispatch, history } = this.props;
-        const { area_id } = this.state.wall;
-        dispatch(updateWall(values, () => history.push(`/area/${area_id}`) ));
+        const { id } = this.props.match.params;
+        dispatch(updateWall(values, () => history.push(`/wall/${id}`) ));
     }
 
     render() {
         const { handleSubmit, history } = this.props;
-        const { area_id } = this.state.wall;
+        const { id } = this.props.match.params;
 
         return (
             <Container>
@@ -63,7 +61,7 @@ class UpdateWallForm extends React.Component {
                         component={this.renderField}
                     />
                     <Form.Button positive>Submit</Form.Button>
-                    <Button negative onClick={() => history.push(`/area/${area_id}`)}>Cancel</Button>
+                    <Button negative onClick={() => history.push(`/wall/${id}`)}>Cancel</Button>
                 </Form>
             </Container>
         )

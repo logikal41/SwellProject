@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { List, Header, Container, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'; 
+import { withRouter, Link } from 'react-router-dom'; 
 import { selectRoute, getRoutes } from '../../../actions/routes';
 import Map from '../Map';
 
@@ -28,9 +28,9 @@ class RouteList extends Component {
               return (
                 <List.Item 
                   key={route.id} 
-                  onClick={() => this.props.dispatch(selectRoute(route))}
+                  onClick={() => this.props.dispatch({ type: 'GET_ACTIVE_SELECTION', payload: route })}
                   >
-                  {route.name}
+                {route.name}
                 </List.Item>
               )
             })}

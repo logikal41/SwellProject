@@ -11,10 +11,13 @@ import Comments from './Comments';
 class DetailWindow extends React.Component {
 
     renderDetails = () => {
-        if ( this.props.selectedRoute ){
+        const { activeSelection, match } = this.props;
+
+        if (activeSelection.wall_id) {
             return <RouteDetails />
         }
-        switch(this.props.match.path) {
+
+        switch(match.path) {
             case '/guide':
                 return <GroupDetails />;
             case '/area/:id':
@@ -38,8 +41,8 @@ class DetailWindow extends React.Component {
     }
 }
 
-const mapStateToProps = ({ selectedRoute }) => {
-    return { selectedRoute }
+const mapStateToProps = ({ activeSelection }) => {
+    return { activeSelection }
 }
 
 export default withRouter(connect(mapStateToProps)(DetailWindow));

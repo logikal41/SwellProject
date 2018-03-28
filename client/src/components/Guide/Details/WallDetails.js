@@ -6,22 +6,22 @@ import { Container, Header, Button } from 'semantic-ui-react';
 import { setHeaders } from '../../../actions/headers';
 import { setFlash } from '../../../actions/flash';
 import { deleteWall } from '../../../actions/walls';
-import { clearRoutes } from '../../../actions/routes';
 
 class WallDetails extends React.Component {
-    state={ area_name: '' };
+    state ={ area_name: '' };
 
     // componentDidMount() {
-    //     const { dispatch, activeSelection } = this.props;
-       
-    //     axios.get(`/api/areaname/${activeSelection.area_id}`)
-    //     .then ( res => {
-    //         this.setState({ area_name: res.data });
+    //     const { dispatch, activeSelection: { area_id } } = this.props;
+
+    //     axios.get(`/api/areaname/${area_id}`)
+    //     .then( res => {
+    //         this.setState({ area_name: res.data })
     //         dispatch(setHeaders(res.headers));
     //     })
-    //     .catch( err => { 
+    //     .catch( err => {
     //         dispatch(setFlash('Failed to get area name', 'red'));
-    //     })  
+    //     }) 
+
     // }
 
       renderNavLinks = () => {
@@ -29,9 +29,9 @@ class WallDetails extends React.Component {
 
           return (
             <Container>
-                <Link to='/guide' onClick={() => dispatch(clearRoutes())}>San Rafael Swell - North > </Link>
-                {/* <Link to={`/area/${area_id}`} onClick={() => dispatch(clearRoutes())}>
-                    {this.state.area_name} </Link> */}
+                <Link to='/guide'>San Rafael Swell - North > </Link>
+                <Link to={`/area/${area_id}`} >
+                    AREA ID: {area_id} </Link>
             </Container>
           )
       }

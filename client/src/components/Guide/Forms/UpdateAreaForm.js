@@ -39,7 +39,8 @@ class UpdateAreaForm extends React.Component {
 
     onSubmit = (values) => {
         const { dispatch, history } = this.props;
-        dispatch(updateArea(values, () => history.push('/guide') ));
+        const { id } = this.props.match.params;
+        dispatch(updateArea(values, () => history.push(`/area/${id}`) ));
     }
 
     render() {

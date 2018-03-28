@@ -4,40 +4,10 @@ import { setHeaders } from '../../../actions/headers';
 import { setFlash } from '../../../actions/flash';
 import { connect } from 'react-redux';
 import { List, Header, Container, Button } from 'semantic-ui-react';
-import { selectRoute, deleteRoute, clearRoutes } from '../../../actions/routes';
+import { selectRoute, deleteRoute } from '../../../actions/routes';
 import { Link, withRouter } from 'react-router-dom';
 
 class RouteDetails extends React.Component {
-    state={ wall: {}, area_name: '' };
-
-    componentDidMount() {
-        const { dispatch } = this.props;
-        const { id } = this.props.match.params;
-       
-        axios.get(`/api/walls/${id}`)
-        .then( res => {
-          this.setState({ wall: res.data.wall});
-          
-            axios.get(`/api/areaname/${res.data.wall.area_id}`)
-            .then ( res => {
-                this.setState({ area_name: res.data });
-            })
-            .catch( err => { 
-                dispatch(setFlash('Failed to get area name', 'red'));
-            })
-
-          dispatch(setHeaders(res.headers));
-        })
-        .catch( err => {
-          dispatch(setFlash('Failed to get wall', 'red'));
-        })
-      }
-
-    clearRouteState = () => {
-        const { dispatch } = this.props;
-        dispatch(selectRoute(null));
-        dispatch(clearRoutes());
-    }
 
     resetRoutes = () => {
         const { dispatch, selectedRoute } = this.props;
@@ -46,16 +16,15 @@ class RouteDetails extends React.Component {
     }
 
     renderNavLinks = () => {
-        const { dispatch } = this.props;
-        const { wall, area_name } = this.state;
+        const { activeSelection } = this.props;
+     
         return (
             <Container>
-                <Link to='/guide' onClick={() => this.clearRouteState()}>San Rafael Swell - North > </Link>
-                <Link to={`/area/${wall.area_id}`} onClick={() => this.clearRouteState()}>
-                    {area_name} > </Link>
-                <Link to={`/wall/${wall.id}`}
-                    onClick={() => dispatch(selectRoute(null))}>
-                    {wall.name} 
+                <Link to='/guide'>San Rafael Swell - North > </Link>
+                <Link to={`/area/1`}>
+                    Hard code Area 1 > </Link>
+                <Link to={`/wall/${activeSelection.wall_id}`}>
+                    Wall ID {activeSelection.wall_id} 
                 </Link>
             </Container>
         )
@@ -63,7 +32,7 @@ class RouteDetails extends React.Component {
 
     render() {
         
-        const { selectedRoute } = this.props;
+        const { activeSelection } = this.props;
 
         return (
             <Container>
@@ -71,22 +40,22 @@ class RouteDetails extends React.Component {
                 <Button onClick={() => this.resetRoutes() }>Delete</Button>
                 <Header as='h1' textAlign='center'>Route Details</Header>
                 <List>
-                    <List.Item>Route Name: {selectedRoute.name}</List.Item>
-                    <List.Item>Difficulty: {selectedRoute.difficulty}</List.Item>
-                    <List.Item>Pitch Count: {selectedRoute.pitch}</List.Item>
-                    <List.Item>Route length: {selectedRoute.length}</List.Item>
-                    <List.Item>First Ascent: {selectedRoute.first_ascent}</List.Item>
-                    <List.Item>Description: {selectedRoute.description}</List.Item>
-                    <List.Item>Required Gear: {selectedRoute.gear}</List.Item>
-                    <List.Item>Descent: {selectedRoute.descent}</List.Item>
+                    <List.Item>Route Name: {activeSelection.name}</List.Item>
+                    <List.Item>Difficulty: {activeSelection.difficulty}</List.Item>
+                    <List.Item>Pitch Count: {activeSelection.pitch}</List.Item>
+                    <List.Item>Route length: {activeSelection.length}</List.Item>
+                    <List.Item>First Ascent: {activeSelection.first_ascent}</List.Item>
+                    <List.Item>Description: {activeSelection.description}</List.Item>
+                    <List.Item>Required Gear: {activeSelection.gear}</List.Item>
+                    <List.Item>Descent: {activeSelection.descent}</List.Item>
                 </List>
             </Container>
         )
     }
 }
 
-const mapStateToProps = ({ selectedRoute }) => {
-    return { selectedRoute }
+const mapStateToProps = ({ activeSelection }) => {
+    return { activeSelection }
 }
 
 export default withRouter(connect(mapStateToProps)(RouteDetails));

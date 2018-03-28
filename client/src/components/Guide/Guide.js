@@ -15,7 +15,8 @@ class Guide extends React.Component {
     renderList = () => {
         const { dispatch, match }= this.props;
 
-        switch(this.props.match.path){
+
+        switch(match.path){
             case '/guide': {
                 dispatch(getGroup());
                 return <AreaList />

@@ -7,17 +7,11 @@ export const GET_ROUTES = 'GET_ROUTES';
 export const DELETE_ROUTE = 'DELETE_ROUTE';
 export const CLEAR_ROUTES = 'CLEAR_ROUTES';
 
-export const selectRoute = (route) => {
+export const selectRoute = (id) => {
     return dispatch => {
-      dispatch({ type: SELECT_ROUTE, payload: route });
+      dispatch({ type: SELECT_ROUTE, payload: id });
     }
   }
-
-export const clearRoutes = () => { 
-  return dispatch => {
-    dispatch({ type: CLEAR_ROUTES });
-  }
-}
 
 export const getRoutes = (wall_id) => {
   return dispatch => {
