@@ -32,15 +32,19 @@ class AreaDetails extends React.Component {
         }
 
         return (
-            <Container>
-                <Link to='/guide'>San Rafael Swell - North</Link>
-                <Container>
-                    <Button onClick={() => dispatch(deleteArea(area.id, () => history.push('/guide')))}>Delete</Button>
-                    <Link to={`/area/update/${area.id}`}>Update</Link>
-                    <Header as='h3'>Area Name: {area.name} </Header>
-                    <Header as='h3'>Area Description: {area.description} </Header>
+            <Container className='comments-container'>
+                <Header className='details-header'> Area: {area.name} 
+                <Button floated='right' basic={true} onClick={() => dispatch(deleteArea(area.id, () => history.push('/guide')))}>Delete</Button>
+                <Button floated='right' basic={true} onClick={`/area/update/${area.id}`}>Update</Button>
+                </Header>
+                <Container className='black-container'>
+                    <Link className='nav-text-color-selected' to='/guide'>San Rafael Swell - North</Link>
+                    </Container>
+                    <Container>
+                        <Header className='description-header'>DESCRIPTION </Header>
+                        <Header className='description-body'> {area.description} </Header>
+                    </Container>
                 </Container>
-            </Container>
         )
     }
 }

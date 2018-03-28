@@ -34,15 +34,15 @@ class AreaList extends Component {
       return <Header as='h1' textAlign='center'>Loading...</Header>
     } else {
       return (
-        <Container>
+        <Container className='list-container'>
           <Map />
-          <Button onClick={() => this.renderCreate()}>New Area</Button>
-          <Header as='h1' textAlign='center'>Area List</Header>
+          <Button className='list-button-creation' fluid={true} onClick={() => this.renderCreate()}>Add Area</Button>
+          <Header className='list-header' textAlign='left'>AREAS</Header>
           <List>
             { areas.map( area => {
               return (
-                <List.Item className='guide-list' key={area.id}>
-                  <Link to={`/area/${area.id}`}> {area.name} </Link>
+                <List.Item key={area.id}>
+                  <Link className='guide-list' to={`/area/${area.id}`}> {area.name} </Link>
                 </List.Item>
               )
             })}

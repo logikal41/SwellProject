@@ -41,8 +41,8 @@ class WallDetails extends React.Component {
 
           return (
             <Container>
-                <Link to='/guide' onClick={() => dispatch(clearRoutes())}>San Rafael Swell - North > </Link>
-                <Link to={`/area/${area_id}`} onClick={() => dispatch(clearRoutes())}>
+                <Link className='nav-text-color' to='/guide' onClick={() => dispatch(clearRoutes())}>San Rafael Swell - North > </Link>
+                <Link className='nav-text-color-selected' to={`/area/${area_id}`} onClick={() => dispatch(clearRoutes())}>
                     {this.state.area_name} </Link>
             </Container>
           )
@@ -57,14 +57,21 @@ class WallDetails extends React.Component {
         }
 
         return (
-            <Container>
+            <Container className='comments-container'>
+                <Header className='details-header'> Wall: {wall.name} 
+                    <Button basic={true} onClick={() => dispatch(deleteWall(wall.id, () => history.push(`/area/${wall.area_id}`)))}> Delete </Button>
+                    <Button basic={true} >Update</Button>
+                </Header>
+                
+            <Container className='black-container'>
                 {this.renderNavLinks()}
+            </Container>
                 <Container>
-                    <Button onClick={() => dispatch(deleteWall(wall.id, () => history.push(`/area/${wall.area_id}`)))}> Delete </Button>
-                    <Header as='h3'>Wall Name: {wall.name} </Header>
-                    <Header as='h3'>Wall Description: {wall.description} </Header>
+                    <Header className='description-header'>DESCRIPTION </Header>
+                    <Header className='description-body'> {wall.description} </Header>
                 </Container>
             </Container>
+            
         )
     }
 }

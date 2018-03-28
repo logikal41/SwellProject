@@ -29,7 +29,6 @@ class DetailWindow extends React.Component {
     render() {  
         return (
             <Container>
-                <Header as='h1' textAlign='center'>Detail Window:</Header>
                 {this.renderDetails()}
 
                 <Comments />

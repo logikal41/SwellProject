@@ -50,10 +50,10 @@ class RouteDetails extends React.Component {
         const { wall, area_name } = this.state;
         return (
             <Container>
-                <Link to='/guide' onClick={() => this.clearRouteState()}>San Rafael Swell - North > </Link>
-                <Link to={`/area/${wall.area_id}`} onClick={() => this.clearRouteState()}>
+                <Link className='nav-text-color' to='/guide' onClick={() => this.clearRouteState()}>San Rafael Swell - North > </Link>
+                <Link className='nav-text-color' to={`/area/${wall.area_id}`} onClick={() => this.clearRouteState()}>
                     {area_name} > </Link>
-                <Link to={`/wall/${wall.id}`}
+                <Link className='nav-text-color-selected'to={`/wall/${wall.id}`}
                     onClick={() => dispatch(selectRoute(null))}>
                     {wall.name} 
                 </Link>
@@ -67,19 +67,24 @@ class RouteDetails extends React.Component {
 
         return (
             <Container>
-                {this.renderNavLinks()}
-                <Button onClick={() => this.resetRoutes() }>Delete</Button>
-                <Header as='h1' textAlign='center'>Route Details</Header>
-                <List>
-                    <List.Item>Route Name: {selectedRoute.name}</List.Item>
-                    <List.Item>Difficulty: {selectedRoute.difficulty}</List.Item>
-                    <List.Item>Pitch Count: {selectedRoute.pitch}</List.Item>
-                    <List.Item>Route length: {selectedRoute.length}</List.Item>
-                    <List.Item>First Ascent: {selectedRoute.first_ascent}</List.Item>
-                    <List.Item>Description: {selectedRoute.description}</List.Item>
-                    <List.Item>Required Gear: {selectedRoute.gear}</List.Item>
-                    <List.Item>Descent: {selectedRoute.descent}</List.Item>
-                </List>
+                <Header className='details-header'> Route: {selectedRoute.name} 
+                    <Button right-floated={true} basic={true} onClick={() => this.resetRoutes() }>Delete</Button>
+                    <Button right-floated={true} basic={true}>Update</Button> 
+                </Header>
+                <Container className='black-container'>
+                    {this.renderNavLinks()}
+                </Container>   
+                    <Header className='description-header'>Route Details</Header>
+                    <List>
+                        <List.Item>Difficulty: {selectedRoute.difficulty}</List.Item>
+                        <List.Item>Pitch Count: {selectedRoute.pitch}</List.Item>
+                        <List.Item>Route length: {selectedRoute.length}</List.Item>
+                        <List.Item>First Ascent: {selectedRoute.first_ascent}</List.Item>
+                        <List.Item>Description: {selectedRoute.description}</List.Item>
+                        <List.Item>Required Gear: {selectedRoute.gear}</List.Item>
+                        <List.Item>Descent: {selectedRoute.descent}</List.Item>
+                    </List>
+                
             </Container>
         )
     }

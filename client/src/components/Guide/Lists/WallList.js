@@ -35,15 +35,15 @@ class WallList extends Component {
       return <Header as='h1' textAlign='center'>Loading...</Header>
     } else {
       return (
-        <Container>
+        <Container className='list-container'>
           <Map />
-          <Button onClick={() => this.renderCreate()}>New Wall</Button>
-          <Header as='h1' textAlign='center'>Wall List</Header>
+          <Button className='list-button-creation' fluid={true} onClick={() => this.renderCreate()}>Add Wall</Button>
+          <Header className='list-header' textAlign='left'>WALLS</Header>
           <List>
             { walls.map( wall => {
               return (
                 <List.Item key={wall.id}>
-                  <Link to={`/wall/${wall.id}`}> {wall.name} </Link>
+                  <Link className='guide-list' to={`/wall/${wall.id}`}> {wall.name} </Link>
                 </List.Item>
               )
             })}

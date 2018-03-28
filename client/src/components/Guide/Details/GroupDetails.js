@@ -30,9 +30,10 @@ class GroupDetails extends Component {
         }
 
         return (
-            <Container>
-                <Header as='h3'>Group Name: {group.name} </Header>
-                <Header as='h3'>Group Description: {group.description} </Header>
+            <Container className='comments-container'>
+                <Header className='details-header'> {group.name} </Header>
+                <Header className='description-header'>DESCRIPTION </Header>
+                <Header className='description-body'>{group.description} </Header>
             </Container>
         )
     }

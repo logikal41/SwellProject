@@ -4,9 +4,9 @@ import { Header, Container } from 'semantic-ui-react';
 class Comments extends React.Component {
     render() {
         return (
-            <Container>
+            <Container className='comments-container'>
                 <div></div> {/* spacer */}
-                <Header as='h1' textAlign='center'> Comments Container </Header>
+                <Header className='comments-header' textAlign='left'> COMMENTS</Header>
             </Container>
         )
     }
