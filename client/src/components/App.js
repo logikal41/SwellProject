@@ -5,7 +5,9 @@ import Login from './Login';
 import Register from './Register';
 import Flash from './Flash';
 import Home from './Home';
-import Guide from './Guide/Guide';
+import GroupGuide from './Guide/GroupGuide';
+import AreaGuide from './Guide/AreaGuide';
+import WallGuide from './Guide/WallGuide';
 import Bio from './Bio';
 import NewAreaForm from './Guide/Forms/NewAreaForm';
 import UpdateAreaForm from './Guide/Forms/UpdateAreaForm';
@@ -31,13 +33,13 @@ class App extends Component {
             <Route exact path='/' component={Home} />
             <Route exact path='/invitation/accept' component={InviteConfirmation} />
             <Route exact path='/bio' component={Bio} />
-            <ProtectedRoute exact path='/guide' component={Guide} authLevel={["admin", "user"]} />
+            <ProtectedRoute exact path='/guide' component={GroupGuide} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/area/new' component={NewAreaForm} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/area/update/:id' component={UpdateAreaForm} authLevel={["admin", "user"]} />
-            <ProtectedRoute exact path='/area/:id' component={Guide} authLevel={["admin", "user"]} />
+            <ProtectedRoute exact path='/area/:id' component={AreaGuide} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/wall/new' component={NewWallForm} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/wall/update/:id' component={UpdateWallForm} authLevel={["admin", "user"]} />
-            <ProtectedRoute exact path='/wall/:id' component={Guide} authLevel={["admin", "user"]} />
+            <ProtectedRoute exact path='/wall/:id' component={WallGuide} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/route/new' component={NewRouteForm} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/route/update/:id' component={UpdateRouteForm} authLevel={["admin", "user"]} />
             <ProtectedRoute exact path='/members' component={MemberTab} authLevel={["admin"]} />

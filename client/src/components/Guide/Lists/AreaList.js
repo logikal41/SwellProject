@@ -6,12 +6,8 @@ import Map from '../Map';
 
 class AreaList extends Component {
 
-  renderCreate = () => {
-    this.props.history.push('/area/new');
-  }
-
   render() {
-    const { activeList } = this.props;
+    const { activeList, history } = this.props;
 
     if ( activeList.length === 0) {
       return <Header as='h1' textAlign='center'>Loading...</Header>
@@ -19,7 +15,7 @@ class AreaList extends Component {
       return (
         <Container className='list-container'>
           <Map />
-          <Button className='list-button-creation' fluid={true} onClick={() => this.renderCreate()}>Add Area</Button>
+          <Button className='list-button-creation' fluid={true} onClick={() => history.push('/area/new')}>Add Area</Button>
           <Header className='list-header' textAlign='left'>AREAS</Header>
           <List>
             { activeList.map( area => {
@@ -35,8 +31,6 @@ class AreaList extends Component {
     }
   }
 }
-
-// onClick={() => dispatch(getArea(area.id, () => history.push(`/area/${area.id}`)))}
 
 const mapStateToProps = ( { activeList }) => { 
   return { activeList }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Form, Header, Container } from 'semantic-ui-react';
+import { Form, Header, Container, Button } from 'semantic-ui-react';
 import { createWall } from '../../../actions/walls';
 import { connect } from 'react-redux';
 
@@ -27,7 +27,7 @@ class NewWallForm extends React.Component {
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, history } = this.props;
 
         return (
             <Container>
@@ -46,6 +46,7 @@ class NewWallForm extends React.Component {
                         placeholder='description'
                     />
                     <Form.Button positive>Submit</Form.Button>
+                    <Button negative onClick={() => history.push('/guide')}>Cancel</Button>
                 </Form>
             </Container>
         )

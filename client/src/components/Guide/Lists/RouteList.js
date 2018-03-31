@@ -7,19 +7,16 @@ import Map from '../Map';
 
 class RouteList extends Component {
 
-  renderCreate = () => {
-    this.props.history.push('/route/new');
-  }
-
   render() {
-    const { activeList } = this.props;
+    const { activeList, history } = this.props;
 
     if ( activeList.length === 0) {
       return <Header as='h1' textAlign='center'>Loading...</Header>
     } else {
       return (
         <Container className='list-container'>
-         <Button className='list-button-creation-route' fluid={true} onClick={() => this.renderCreate()}>Add Route</Button>
+          <Map />
+          <Button className='list-button-creation' fluid={true} onClick={() => history.push('/route/new')}>Add Route</Button>
           <Header className='list-header' textAlign='left'>ROUTES</Header>
           <List>
             { activeList.map( route => {

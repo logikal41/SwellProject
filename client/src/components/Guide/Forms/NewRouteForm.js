@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Form, Header, Container } from 'semantic-ui-react';
+import { Form, Header, Container, Button } from 'semantic-ui-react';
 import { createRoute } from '../../../actions/routes';
 import { connect } from 'react-redux';
 
@@ -26,7 +26,7 @@ class NewRouteForm extends React.Component {
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, history } = this.props;
 
         return (
             <Container>
@@ -73,6 +73,7 @@ class NewRouteForm extends React.Component {
                         component={this.renderField}
                     />
                     <Form.Button positive>Submit</Form.Button>
+                    <Button negative onClick={() => history.push('/guide')}>Cancel</Button>
                 </Form>
             </Container>
         )

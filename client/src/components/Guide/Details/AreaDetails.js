@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Container, Header, Button } from 'semantic-ui-react';
 import { deleteArea } from '../../../actions/areas';
 
-class AreaDetails extends React.Component {
+class AreaDetails extends Component {
 
     render() {
         const { dispatch, history, activeSelection } = this.props;
@@ -16,8 +16,11 @@ class AreaDetails extends React.Component {
         return (
             <Container className='comments-container'>
                 <Header className='details-header'> Area: {activeSelection.name}
-                    <Button floated='right' basic={true} onClick={() => dispatch(deleteArea(activeSelection.id, () => history.push('/guide')))}>Delete</Button>
-                    <Button floated='right' basic={true} onClick={`/area/update/${activeSelection.id}`}>Update</Button>
+                    <Button floated='right' basic={true} 
+                        onClick={() => dispatch(deleteArea(activeSelection.id, () => history.push('/guide')))}>
+                        Delete
+                    </Button>
+                    <Button floated='right' basic={true} onClick={() => history.push(`/area/update/${activeSelection.id}`)}>Update</Button>
                 </Header>
                 <Container className='black-container'>
                     <Link className='nav-text-color-selected' to='/guide'>San Rafael Swell - North</Link>

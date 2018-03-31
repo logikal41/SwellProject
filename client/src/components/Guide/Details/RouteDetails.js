@@ -1,27 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { List, Header, Container, Button } from 'semantic-ui-react';
 import { selectRoute, deleteRoute } from '../../../actions/routes';
 import { Link, withRouter } from 'react-router-dom';
 
-class RouteDetails extends React.Component {
+class RouteDetails extends Component {
 
-    resetRoutes = () => {
-        const { dispatch, selectedRoute } = this.props;
-        dispatch(deleteRoute(selectedRoute.id));
-        dispatch(selectRoute(null));
-    }
 
     renderNavLinks = () => {
         const { activeSelection } = this.props;
      
         return (
             <Container>
-                <Link className='nav-text-color' to='/guide' onClick={() => this.clearRouteState()}>San Rafael Swell - North > </Link>
-                <Link className='nav-text-color' to={`/area/${activeSelection.area_id}`} onClick={() => this.clearRouteState()}>
-                    AREA ID: {activeSelection.id} > </Link>
-                <Link className='nav-text-color-selected'to={`/wall/${activeSelection.id}`}>
-                    {activeSelection.name} 
+                <Link className='nav-text-color' to='/guide'>San Rafael Swell - North > </Link>
+                {/* Hard coded area 1 */}
+                <Link className='nav-text-color-selected' to={`/area/1`}>
+                    AREA 1 > </Link> 
+                <Link className='nav-text-color-selected'to={`/wall/${activeSelection.wall_id}`}>
+                    WALL {activeSelection.wall_id} 
                 </Link>
             </Container>
         )
@@ -29,12 +25,15 @@ class RouteDetails extends React.Component {
 
     render() {
         
-        const { activeSelection, history } = this.props;
+        const { activeSelection, dispatch, history } = this.props;
 
         return (
             <Container>
                 <Header className='details-header'> Route: {activeSelection.name} 
-                    <Button right-floated={true} basic={true} onClick={() => this.resetRoutes() }>Delete</Button>
+                    <Button right-floated={true} basic={true} 
+                        onClick={() => dispatch(deleteRoute(activeSelection.id))}>
+                        Delete
+                    </Button>
                     <Button right-floated={true} basic={true}>Update</Button> 
                 </Header>
                 <Container className='black-container'>
