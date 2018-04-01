@@ -10,7 +10,12 @@ class WallList extends Component {
     const { activeList, history } = this.props;
 
     if ( activeList.length === 0) {
-      return <Header as='h1' textAlign='center'>Loading...</Header>
+      return (
+        <Container>
+          <Header as='h1' textAlign='center'>Loading...</Header>
+          <Link to='/guide'>Main Menu</Link>
+        </Container>
+      )
     } else {
       return (
         <Container className='list-container'>

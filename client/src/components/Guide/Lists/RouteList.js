@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { List, Header, Container, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'; 
+import { Link, withRouter } from 'react-router-dom'; 
 import Map from '../Map';
 
 
@@ -11,7 +11,12 @@ class RouteList extends Component {
     const { activeList, history } = this.props;
 
     if ( activeList.length === 0) {
-      return <Header as='h1' textAlign='center'>Loading...</Header>
+      return (
+        <Container>
+          <Header as='h1' textAlign='center'>Loading...</Header>
+          <Link to='/guide'>Main Menu</Link>
+        </Container>
+      )
     } else {
       return (
         <Container className='list-container'>

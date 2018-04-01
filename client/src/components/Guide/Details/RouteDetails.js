@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { List, Header, Container, Button } from 'semantic-ui-react';
-import { selectRoute, deleteRoute } from '../../../actions/routes';
-import { Link, withRouter } from 'react-router-dom';
+import { deleteRoute } from '../../../actions/routes';
+import { Link } from 'react-router-dom';
 
 class RouteDetails extends Component {
 
 
     renderNavLinks = () => {
-        const { activeSelection } = this.props;
+        const { activeSelection, area_name, area_id, wall_name, toggleWallDetails } = this.props;
      
         return (
             <Container>
                 <Link className='nav-text-color' to='/guide'>San Rafael Swell - North > </Link>
-                {/* Hard coded area 1 */}
-                <Link className='nav-text-color-selected' to={`/area/1`}>
-                    AREA 1 > </Link> 
-                <Link className='nav-text-color-selected'to={`/wall/${activeSelection.wall_id}`}>
-                    WALL {activeSelection.wall_id} 
+                <Link className='nav-text-color' to={`/area/${area_id}`}>
+                    {area_name} > </Link> 
+                <Link className='nav-text-color-selected' to={`/wall/${activeSelection.wall_id}`} 
+                onClick={() => toggleWallDetails()}>
+                    {wall_name}
                 </Link>
             </Container>
         )
@@ -25,21 +25,24 @@ class RouteDetails extends Component {
 
     render() {
         
-        const { activeSelection, dispatch, history } = this.props;
+        const { activeSelection, dispatch } = this.props;
 
         return (
-            <Container>
+            <Container className='comments-container'>
+
                 <Header className='details-header'> Route: {activeSelection.name} 
-                    <Button right-floated={true} basic={true} 
+                    <Button floated='right' basic={true} 
                         onClick={() => dispatch(deleteRoute(activeSelection.id))}>
                         Delete
                     </Button>
-                    <Button right-floated={true} basic={true}>Update</Button> 
+                    <Button floated='right' basic={true}>Update</Button> 
                 </Header>
+
                 <Container className='black-container'>
                     {this.renderNavLinks()}
-                </Container>   
-                    <Header className='description-header'>Route Details</Header>
+                </Container>
+
+                <Container>  
                     <List>
                         <List.Item>Difficulty: {activeSelection.difficulty}</List.Item>
                         <List.Item>Pitch Count: {activeSelection.pitch}</List.Item>
@@ -49,7 +52,7 @@ class RouteDetails extends Component {
                         <List.Item>Required Gear: {activeSelection.gear}</List.Item>
                         <List.Item>Descent: {activeSelection.descent}</List.Item>
                     </List>
-                
+                </Container>
             </Container>
         )
     }
@@ -59,4 +62,4 @@ const mapStateToProps = ({ activeSelection }) => {
     return { activeSelection }
 }
 
-export default withRouter(connect(mapStateToProps)(RouteDetails));
+export default connect(mapStateToProps)(RouteDetails);

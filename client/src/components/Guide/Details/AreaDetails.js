@@ -15,6 +15,7 @@ class AreaDetails extends Component {
 
         return (
             <Container className='comments-container'>
+
                 <Header className='details-header'> Area: {activeSelection.name}
                     <Button floated='right' basic={true} 
                         onClick={() => dispatch(deleteArea(activeSelection.id, () => history.push('/guide')))}>
@@ -22,13 +23,16 @@ class AreaDetails extends Component {
                     </Button>
                     <Button floated='right' basic={true} onClick={() => history.push(`/area/update/${activeSelection.id}`)}>Update</Button>
                 </Header>
+
                 <Container className='black-container'>
                     <Link className='nav-text-color-selected' to='/guide'>San Rafael Swell - North</Link>
                 </Container>
+
                 <Container>
                     <Header className='description-header'>DESCRIPTION </Header>
                     <Header className='description-body'> {activeSelection.description} </Header>
                 </Container>
+                
             </Container>
         )
     }
