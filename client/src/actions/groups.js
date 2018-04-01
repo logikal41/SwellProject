@@ -18,3 +18,16 @@ export const getGroup = () => {
       })
     }
   }
+
+  export const updateGroup = (group, callBack) => {
+    return dispatch => {
+    axios.put(`../../api/groups/${group.id}`, group )
+      .then( res => {
+        dispatch(setHeaders(res.headers));
+        callBack();
+      })
+      .catch( err => {
+        dispatch(setFlash('Failed to update group', 'red'));
+      })  
+    } 
+  }

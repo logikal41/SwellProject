@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   # This nested route is only a band aid... there will be 4 to 5 tables ... cant nest that deep
 
   namespace :api do
-    resources :groups, only: :show
+    resources :groups, only: [:show, :update]
     resources :areas, only: [:show, :create, :destroy, :update]
     get 'areaname/:id', to:'areas#areaname'
 
