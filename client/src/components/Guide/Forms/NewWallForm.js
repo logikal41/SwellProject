@@ -22,12 +22,12 @@ class NewWallForm extends React.Component {
 
     onSubmit = (values) => {
         const { dispatch, history } = this.props;
-        const { id } = this.props.selectedArea;
+        const { id } = this.props.activeSelection;
         dispatch(createWall( { id, ...values}, () => history.push(`/area/${id}`) ));
     }
 
     render() {
-        const { handleSubmit, history } = this.props;
+        const { handleSubmit, history, activeSelection } = this.props;
 
         return (
             <Container>
@@ -46,7 +46,7 @@ class NewWallForm extends React.Component {
                         placeholder='description'
                     />
                     <Form.Button positive>Submit</Form.Button>
-                    <Button negative onClick={() => history.push('/guide')}>Cancel</Button>
+                    <Button negative onClick={() => history.push(`/area/${activeSelection.id}`)}>Cancel</Button>
                 </Form>
             </Container>
         )
@@ -66,8 +66,8 @@ const validate = (values) => {
     return errors;
 }
 
-const mapStateToProps = ({ selectedArea }) => {
-    return { selectedArea }
+const mapStateToProps = ({ activeSelection }) => {
+    return { activeSelection }
 };
 
 export default reduxForm({
