@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Form, Header, Container, Button } from 'semantic-ui-react';
-// import { updateRoute } from '../../../actions/routes';
+import { updateRoute } from '../../../actions/routes';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { setHeaders } from '../../../actions/headers';
@@ -40,9 +40,9 @@ class UpdateRouteForm extends React.Component {
 
     onSubmit = (values) => {
         console.log(values)
-        // const { dispatch, history } = this.props;
-        // const { id } = this.props.selectedWall;
-        // dispatch(updateRoute( { wall_id: id , ...values }, () => history.push(`/wall/${id}`) ));
+        const { dispatch, history } = this.props;
+        const { wall_id, id } = this.state.route;
+        dispatch(updateRoute( { id: id, wall_id: wall_id, ...values }, () => history.push(`/wall/${wall_id}`) ));
     }
 
     render() {

@@ -21,12 +21,12 @@ class NewRouteForm extends React.Component {
 
     onSubmit = (values) => {
         const { dispatch, history } = this.props;
-        const { id } = this.props.selectedWall;
+        const { id } = this.props.activeSelection;
         dispatch(createRoute( { wall_id: id , ...values }, () => history.push(`/wall/${id}`) ));
     }
 
     render() {
-        const { handleSubmit, history } = this.props;
+        const { handleSubmit, history, activeSelection} = this.props;
 
         return (
             <Container>
@@ -73,7 +73,7 @@ class NewRouteForm extends React.Component {
                         component={this.renderField}
                     />
                     <Form.Button positive>Submit</Form.Button>
-                    <Button negative onClick={() => history.push('/guide')}>Cancel</Button>
+                    <Button negative onClick={() => history.push(`/wall/${activeSelection.id}`)}>Cancel</Button>
                 </Form>
             </Container>
         )
@@ -96,10 +96,8 @@ const validate = (values) => {
     return errors;
 }
 
-const mapStateToProps = ({ selectedWall }) => {
-    return { 
-        selectedWall,
-     }
+const mapStateToProps = ({ activeSelection }) => {
+    return { activeSelection }
 };
 
 export default reduxForm({

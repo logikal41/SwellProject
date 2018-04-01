@@ -51,3 +51,16 @@ export const deleteRoute = (id) => {
     })  
   } 
 }
+
+export const updateRoute = (route, callBack) => {
+  return dispatch => {
+  axios.put(`../../api/routes/${route.id}`, route )
+    .then( res => {
+      dispatch(setHeaders(res.headers));
+      callBack();
+    })
+    .catch( err => {
+      dispatch(setFlash('Failed to update route', 'red'));
+    })  
+  } 
+}

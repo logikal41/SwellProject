@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     get 'areaname/:id', to:'areas#areaname'
 
     resources :walls, only: [:show, :create, :destroy, :update]
-    resources :routes, only: [:show, :create, :destroy]
+    resources :routes, only: [:show, :create, :destroy, :update]
     resources :users, only: [:index]
 
     

@@ -55,7 +55,7 @@ class Guide extends Component {
             <Container>
                 <Grid>
                     <Grid.Column width={4}>
-                        <RouteList />
+                        <RouteList wall={wall} />
                     </Grid.Column>
                     <Grid.Column width={12}>
                         {activeSelection.wall_id ? 

@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { List, Header, Container, Button } from 'semantic-ui-react';
 import { deleteRoute } from '../../../actions/routes';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 class RouteDetails extends Component {
+
+    removeRoute = (id) => {
+        const { dispatch, toggleWallDetails } = this.props;
+        dispatch(deleteRoute(id));
+        toggleWallDetails();
+    }
 
 
     renderNavLinks = () => {
@@ -25,17 +31,20 @@ class RouteDetails extends Component {
 
     render() {
         
-        const { activeSelection, dispatch } = this.props;
+        const { activeSelection, history } = this.props;
 
         return (
             <Container className='comments-container'>
 
                 <Header className='details-header'> Route: {activeSelection.name} 
                     <Button floated='right' basic={true} 
-                        onClick={() => dispatch(deleteRoute(activeSelection.id))}>
+                        onClick={() => this.removeRoute(activeSelection.id)}>
                         Delete
                     </Button>
-                    <Button floated='right' basic={true}>Update</Button> 
+                    <Button floated='right' basic={true}
+                        onClick={() => history.push(`/route/update/${activeSelection.id}`)}>
+                        Update
+                    </Button> 
                 </Header>
 
                 <Container className='black-container'>
@@ -62,4 +71,4 @@ const mapStateToProps = ({ activeSelection }) => {
     return { activeSelection }
 }
 
-export default connect(mapStateToProps)(RouteDetails);
+export default withRouter(connect(mapStateToProps)(RouteDetails));

@@ -7,8 +7,14 @@ import Map from '../Map';
 
 class RouteList extends Component {
 
+  createRoute = () => {
+    const { history, wall, dispatch } = this.props;
+    dispatch({ type: 'GET_ACTIVE_SELECTION', payload: wall });
+    history.push('/route/new');
+  }
+
   render() {
-    const { activeList, history } = this.props;
+    const { activeList } = this.props;
 
     if ( activeList.length === 0) {
       return (
@@ -21,7 +27,7 @@ class RouteList extends Component {
       return (
         <Container className='list-container'>
           <Map />
-          <Button className='list-button-creation' fluid={true} onClick={() => history.push('/route/new')}>Add Route</Button>
+          <Button className='list-button-creation' fluid={true} onClick={() => this.createRoute()}>Add Route</Button>
           <Header className='list-header' textAlign='left'>ROUTES</Header>
           <List>
             { activeList.map( route => {
