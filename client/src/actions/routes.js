@@ -26,7 +26,7 @@ export const getRoutes = (wall_id) => {
     }
 }
 
-export const createRoute = ( values, callBack) => {
+export const createRoute = (values, callBack) => {
   return dispatch => {
   axios.post('../api/routes', values )
     .then( res => {

@@ -11,7 +11,7 @@ import { setFlash } from '../../actions/flash';
 
 
 class Guide extends Component {
-    state={ wall: {}, wall_name: '', area_id: null, area_name: '' };
+    state={ wall: {}, area_name: '' };
 
     componentDidMount() {
         const { dispatch, match } = this.props;
@@ -20,7 +20,7 @@ class Guide extends Component {
         .then( res => {
             dispatch({ type: 'GET_ACTIVE_LIST', payload: res.data.routes })
             dispatch({ type: 'GET_ACTIVE_SELECTION', payload: res.data.wall })
-            this.setState({ wall: res.data.wall, area_id: res.data.wall.area_id })
+            this.setState({ wall: res.data.wall })
             
             axios.get(`/api/areaname/${res.data.wall.area_id}`)
             .then( res => {
@@ -45,7 +45,7 @@ class Guide extends Component {
 
     render() {
         const { activeSelection } = this.props;
-        const { area_id, area_name, wall } = this.state;
+        const { area_name, wall } = this.state;
 
         if (!activeSelection) {
             return <Header as='h1' textAlign='center'>Loading...</Header>
@@ -61,7 +61,7 @@ class Guide extends Component {
                         {activeSelection.wall_id ? 
                             <RouteDetails 
                                 area_name={area_name} 
-                                area_id={area_id} 
+                                area_id={wall.area_id} 
                                 wall_name={wall.name}
                                 toggleWallDetails={this.toggleWallDetails} 
                             /> 

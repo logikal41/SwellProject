@@ -7,13 +7,13 @@ import { deleteWall } from '../../../actions/walls';
 class WallDetails extends Component {
 
       renderNavLinks = () => {
-          const { activeSelection: {area_id} } = this.props;
+          const { activeSelection: {area_id}, area_name } = this.props;
 
           return (
             <Container>
                 <Link className='nav-text-color' to='/guide'>San Rafael Swell - North > </Link>
                 <Link className='nav-text-color-selected' to={`/area/${area_id}`}>
-                    {this.props.area_name} </Link>
+                    {area_name} </Link>
             </Container>
           )
       }
