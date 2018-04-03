@@ -32,7 +32,8 @@ class RouteList extends Component {
           <List>
             { activeList.map( route => {
               return (
-                <List.Item 
+                <List.Item
+                  className='guide-list route-list' 
                   key={route.id} 
                   onClick={() => this.props.dispatch({ type: 'GET_ACTIVE_SELECTION', payload: route })}
                   >
