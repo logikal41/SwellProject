@@ -36,7 +36,7 @@ class RouteDetails extends Component {
         return (
             <Container className='comments-container'>
 
-                <Header className='details-header'> Route: {activeSelection.name} 
+                <Header className='details-header'> {activeSelection.name} 
                     <Button floated='right' basic={true} 
                         onClick={() => this.removeRoute(activeSelection.id)}>
                         Delete

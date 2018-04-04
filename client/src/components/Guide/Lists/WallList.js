@@ -7,7 +7,7 @@ import Map from '../Map';
 class WallList extends Component {
     
   render() {
-    const { activeList, history } = this.props;
+    const { activeList, activeSelection, history } = this.props;
 
     if ( activeList.length === 0) {
       return (
@@ -21,7 +21,7 @@ class WallList extends Component {
         <Container className='list-container'>
           <Map />
           <Button className='list-button-creation' fluid={true} onClick={() => history.push('/wall/new')}>Add Wall</Button>
-          <Header className='list-header' textAlign='left'>WALLS</Header>
+          <Header className='list-header' textAlign='left'>WALLS IN {activeSelection.name.toUpperCase()}</Header>
           <List>
             { activeList.map( wall => {
               return (
@@ -37,8 +37,8 @@ class WallList extends Component {
   }
 }
 
-const mapStateToProps = ({ activeList }) => {
-  return { activeList }
+const mapStateToProps = ({ activeList, activeSelection }) => {
+  return { activeList, activeSelection }
 }
 
 export default withRouter(connect(mapStateToProps)(WallList));

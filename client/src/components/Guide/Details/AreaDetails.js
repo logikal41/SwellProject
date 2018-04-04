@@ -16,7 +16,7 @@ class AreaDetails extends Component {
         return (
             <Container className='comments-container'>
 
-                <Header className='details-header'> Area: {activeSelection.name}
+                <Header className='details-header'> {activeSelection.name}
                     <Button floated='right' basic={true} 
                         onClick={() => dispatch(deleteArea(activeSelection.id, () => history.push('/guide')))}>
                         Delete

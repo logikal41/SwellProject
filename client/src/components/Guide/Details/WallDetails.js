@@ -28,7 +28,7 @@ class WallDetails extends Component {
         return (
             <Container className='comments-container'>
 
-                <Header className='details-header'> Wall: {activeSelection.name} 
+                <Header className='details-header'> {activeSelection.name} 
                     <Button floated='right' basic={true} 
                         onClick={() => dispatch(deleteWall(activeSelection.id, () => history.push(`/area/${activeSelection.area_id}`)))}> 
                         Delete 
