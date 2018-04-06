@@ -9,10 +9,11 @@ class Bio extends React.Component {
 
         return (
             <Container>
-             <Header as='h1' textAlign='center'> User Bio: </Header>
-             <Header as='h3'>Name: {name}</Header>
-             <Header as='h3'>Email: {email}</Header>
-             <Header as='h3'>Role: {role}</Header>
+             <Header className='details-header' textAlign='left'> User Bio </Header>
+             <Header className='list-header'>USERNAME: {name}</Header>
+             <Header className='list-header'>EMAIL: {email}</Header>
+             <Header className='list-header'>PASSWORD: password</Header>
+             <Header className='list-header'>ROLE: {role}</Header>
             </Container>
         )
     }

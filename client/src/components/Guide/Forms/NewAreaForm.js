@@ -30,22 +30,25 @@ class NewAreaForm extends React.Component {
 
         return (
             <Container>
-                <Header as='h1' textAlign='center'>New Area Form</Header>
+                <Header as='h1' textAlign='left'>Make Area</Header>
                 <Form onSubmit={ handleSubmit(this.onSubmit) }>
                     <Field
-                        label='Name of Area'
+                        label='NAME OF AREA'
                         name='name'
                         component={this.renderField}
                         placeholder='name'
                     />
-                    <Field
-                        label='Area Description'
+                    <Field className='list-header'
+                        label='AREA DESCRIPTION'
                         name='description'
                         component={this.renderField}
                         placeholder='description'
                     />
-                    <Form.Button positive>Submit</Form.Button>
-                    <Button negative onClick={() => history.push('/guide')}>Cancel</Button>
+                    
+                    <Header>
+                        <Form.Button floated='left' button class="ui black button" positive>MAKE AREA</Form.Button>
+                        <Button floated='left' basic={true} negative onClick={() => history.push('/guide')}>CANCEL</Button>
+                    </Header>
                 </Form>
             </Container>
         )
