@@ -46,6 +46,7 @@ class NewAreaForm extends React.Component {
                     />
                     
                     <Header>
+                        {/* Comment */}
                         <Form.Button floated='left' button class="ui black button" positive>MAKE AREA</Form.Button>
                         <Button floated='left' basic={true} negative onClick={() => history.push('/guide')}>CANCEL</Button>
                     </Header>
