@@ -47,21 +47,21 @@ class UpdateAreaForm extends React.Component {
         const { id } = this.props.match.params;
 
         return (
-            <Container>
-                <Header as='h1' textAlign='center'>Update Area Form</Header>
+            <Container className='make-form-container'>
+                <Header className='details-header' textAlign='left'>Update Area Form</Header>
                 <Form onSubmit={ handleSubmit(this.onSubmit) }>
                     <Field
-                        label='Name of Area'
+                        label='NAME OF AREA'
                         name='name'
                         component={this.renderField}
                     />
                     <Field
-                        label='Area Description'
+                        label='AREA DESCRIPTION'
                         name='description'
                         component={this.renderField}
                     />
-                    <Form.Button positive>Submit</Form.Button>
-                    <Button negative onClick={() => history.push(`/area/${id}`)}>Cancel</Button>
+                    <Button color='black' floated='left'>UPDATE AREA</Button>
+                    <Button color='black' floated='left' basic={true} onClick={() => history.push(`/area/${id}`)}>CANCEL</Button>
                 </Form>
             </Container>
         )

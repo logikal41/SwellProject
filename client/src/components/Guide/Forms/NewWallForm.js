@@ -45,8 +45,8 @@ class NewWallForm extends React.Component {
                         component={this.renderField}
                         placeholder='description'
                     />
-                    <Button color='black' floated='left'>Submit</Button>
-                    <Button color='black' floated='left' basic={true} onClick={() => history.push(`/area/${activeSelection.id}`)}>Cancel</Button>
+                    <Button color='black' floated='left'>CREATE WALL</Button>
+                    <Button color='black' floated='left' basic={true} onClick={() => history.push(`/area/${activeSelection.id}`)}>CANCEL</Button>
                 </Form>
             </Container>
         )

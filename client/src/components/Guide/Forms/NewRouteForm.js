@@ -72,8 +72,8 @@ class NewRouteForm extends React.Component {
                         name='descent'
                         component={this.renderField}
                     />
-                    <Button color='black' floated='left'>Submit</Button>
-                    <Button color='black' floated='left' basic={true} onClick={() => history.push(`/wall/${activeSelection.id}`)}>Cancel</Button>
+                    <Button color='black' floated='left'>CREATE ROUTE</Button>
+                    <Button color='black' floated='left' basic={true} onClick={() => history.push(`/wall/${activeSelection.id}`)}>CANCEL</Button>
                 </Form>
             </Container>
         )

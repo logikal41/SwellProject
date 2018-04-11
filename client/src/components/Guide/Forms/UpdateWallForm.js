@@ -47,21 +47,21 @@ class UpdateWallForm extends React.Component {
         const { id } = this.props.match.params;
 
         return (
-            <Container>
-                <Header as='h1' textAlign='center'>Update Wall Form</Header>
+            <Container className='make-form-container'>
+                <Header className='details-header' textAlign='left'>Update Wall Form</Header>
                 <Form onSubmit={ handleSubmit(this.onSubmit) }>
                     <Field
-                        label='Name of Wall'
+                        label='NAME OF WALL'
                         name='name'
                         component={this.renderField}
                     />
                     <Field
-                        label='Wall Description'
+                        label='WALL DESCRIPTION'
                         name='description'
                         component={this.renderField}
                     />
-                    <Form.Button positive>Submit</Form.Button>
-                    <Button negative onClick={() => history.push(`/wall/${id}`)}>Cancel</Button>
+                    <Form.Button positive>UPDATE WALL</Form.Button>
+                    <Button negative onClick={() => history.push(`/wall/${id}`)}>CANCEL</Button>
                 </Form>
             </Container>
         )

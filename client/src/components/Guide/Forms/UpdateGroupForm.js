@@ -45,21 +45,21 @@ class UpdateGroupForm extends Component {
         const { handleSubmit, history } = this.props;
 
         return (
-            <Container>
-                <Header as='h1' textAlign='center'>Update Group Form</Header>
+            <Container className='make-form-container'>
+                <Header className='details-header' textAlign='left'>Update Group Form</Header>
                 <Form onSubmit={ handleSubmit(this.onSubmit) }>
                     <Field
-                        label='Name of Group'
+                        label='NAME OF GROUP'
                         name='name'
                         component={this.renderField}
                     />
                     <Field
-                        label='Group Description'
+                        label='GROUP DESCRIPTION'
                         name='description'
                         component={this.renderField}
                     />
-                    <Form.Button positive>Submit</Form.Button>
-                    <Button negative onClick={() => history.push('/guide')}>Cancel</Button>
+                    <Button color='black' floated='left'>UPDATE GROUP</Button>
+                    <Button color='black' floated='left' basic={true} onClick={() => history.push('/guide')}>CANCEL</Button>
                 </Form>
             </Container>
         )
