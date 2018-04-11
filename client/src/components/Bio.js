@@ -8,7 +8,7 @@ class Bio extends React.Component {
         const { name, email, role } = this.props.user
 
         return (
-            <Container>
+            <Container className='make-form-container'>
              <Header className='details-header' textAlign='left'> User Bio </Header>
              <Header className='list-header'>USERNAME: {name}</Header>
              <Header className='list-header'>EMAIL: {email}</Header>

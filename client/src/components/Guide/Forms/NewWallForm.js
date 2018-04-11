@@ -30,23 +30,23 @@ class NewWallForm extends React.Component {
         const { handleSubmit, history, activeSelection } = this.props;
 
         return (
-            <Container>
-                <Header as='h1' textAlign='center'>New Wall Form</Header>
+            <Container className='make-form-container'>
+                <Header className='details-header' textAlign='left'>New Wall Form</Header>
                 <Form onSubmit={ handleSubmit(this.onSubmit) }>
                     <Field
-                        label='Name of Wall'
+                        label='NAME OF WALL'
                         name='name'
                         component={this.renderField}
                         placeholder='name'
                     />
                     <Field
-                        label='Wall Description'
+                        label='WALL DESCRIPTION'
                         name='description'
                         component={this.renderField}
                         placeholder='description'
                     />
-                    <Form.Button positive>Submit</Form.Button>
-                    <Button negative onClick={() => history.push(`/area/${activeSelection.id}`)}>Cancel</Button>
+                    <Button color='black' floated='left'>Submit</Button>
+                    <Button color='black' floated='left' basic={true} onClick={() => history.push(`/area/${activeSelection.id}`)}>Cancel</Button>
                 </Form>
             </Container>
         )

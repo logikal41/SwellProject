@@ -29,8 +29,8 @@ class NewAreaForm extends React.Component {
         const { handleSubmit, history } = this.props;
 
         return (
-            <Container>
-                <Header as='h1' textAlign='left'>Make Area</Header>
+            <Container className='make-form-container'>
+                <Header className='details-header' textAlign='left'>Make Area</Header>
                 <Form onSubmit={ handleSubmit(this.onSubmit) }>
                     <Field
                         label='NAME OF AREA'
@@ -38,17 +38,17 @@ class NewAreaForm extends React.Component {
                         component={this.renderField}
                         placeholder='name'
                     />
-                    <Field className='list-header'
+                    <Field
                         label='AREA DESCRIPTION'
                         name='description'
                         component={this.renderField}
                         placeholder='description'
                     />
                     
-                    <Header>
-                        <Form.Button floated='left' button class="ui black button" positive>CREATE AREA</Form.Button>
-                        <Button floated='left' basic={true} negative onClick={() => history.push('/guide')}>CANCEL</Button>
-                    </Header>
+                    <div>
+                        <Button color='black' floated='left'>CREATE AREA</Button>
+                        <Button color='black' floated='left' basic={true} onClick={() => history.push('/guide')}>CANCEL</Button>
+                    </div>
                 </Form>
             </Container>
         )
